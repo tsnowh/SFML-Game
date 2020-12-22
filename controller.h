@@ -7,6 +7,9 @@
 class Controller {
   private:
     Model model;
+
+    //handlers
+    void KeyPressedHandler(sf::Event &e);
   public:
     Controller();
     void Gameloop();
