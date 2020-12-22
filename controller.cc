@@ -8,7 +8,7 @@ void Controller::Gameloop() {
     int x = 250;
     int y = 250;
 
-    sf::CircleShape shape(100.f);
+    sf::CircleShape shape(10.f);
     shape.setFillColor(sf::Color::Green);
     shape.setPosition(x, y);
     shape.setOrigin (250, 250);
