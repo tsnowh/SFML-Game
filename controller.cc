@@ -7,8 +7,8 @@ void Controller::Gameloop() {
 
     // while there are pending events...
 
-    while (display.getWindow()->isOpen()) {
-        while (display.getWindow()->pollEvent(event)) {
+    while (model.getDisplay()->getWindow().isOpen()) {
+        while (model.getDisplay()->getWindow().pollEvent(event)) {
 
             sf::CircleShape shape(100.f);
             shape.setFillColor(sf::Color::Green);
@@ -17,7 +17,7 @@ void Controller::Gameloop() {
             switch (event.type) {
                 // window closed
                 case sf::Event::Closed:
-                    display.getWindow()->close();
+                    model.getDisplay()->getWindow().close();
                     break;
 
                 // key pressed
@@ -28,9 +28,10 @@ void Controller::Gameloop() {
                 default:
                     break;
             }
-            display.getWindow()->clear();
-            display.getWindow()->draw(shape);
-            display.getWindow()->display();
+
+            model.getDisplay()->getWindow().clear();
+            model.getDisplay()->getWindow().draw(shape);
+            model.getDisplay()->getWindow().display();
         }
     }
 }

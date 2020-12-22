@@ -2,11 +2,11 @@
 #define __CONTROLLER_H__
 
 #include <SFML/Graphics.hpp>
-#include "display.h"
+#include "model.h"
 
 class Controller {
   private:
-    Display display; 
+    Model model;
   public:
     Controller();
     void Gameloop();

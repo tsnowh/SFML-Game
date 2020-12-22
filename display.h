@@ -7,10 +7,10 @@
 class Display {
   private:
     //sf::RenderWindow window; 
-    std::unique_ptr<sf::RenderWindow> window;
+    sf::RenderWindow window;
   public:
     Display();
-    sf::RenderWindow * getWindow();
+    sf::RenderWindow& getWindow();
 };
 
 

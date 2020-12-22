@@ -1,12 +1,9 @@
 #include "display.h"
 
-Display::Display() {
-    //sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    window = std::make_unique<sf::RenderWindow>(sf::VideoMode(200, 200), "SFML works!");
-}
+Display::Display(): window(sf::VideoMode(200, 200), "SFML works!") {}
 
-sf::RenderWindow * Display::getWindow() {
-    return window.get();
+sf::RenderWindow& Display::getWindow() {
+    return window;
 }
 
 /*
