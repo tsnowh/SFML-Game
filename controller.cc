@@ -1,18 +1,10 @@
 #include "controller.h"
+#include <iostream>
 
 Controller::Controller() {}
 
 void Controller::Gameloop() {
     sf::Event event;
-
-    int x = 250;
-    int y = 250;
-
-    sf::CircleShape shape(10.f);
-    shape.setFillColor(sf::Color::Green);
-    shape.setPosition(x, y);
-    shape.setOrigin (250, 250);
-
 
     while (model.getDisplay()->getWindow().isOpen()) {
         while (model.getDisplay()->getWindow().pollEvent(event)) {
@@ -24,16 +16,20 @@ void Controller::Gameloop() {
 
                 case sf::Event::KeyPressed:
                     if (event.key.code == sf::Keyboard::W) {
-                        y -= 20;
+                        model.getPlayer()->setY(model.getPlayer()->getY() - 20);
+                        std::cout << model.getPlayer()->getY() << std::endl;
                     }
                     if (event.key.code == sf::Keyboard::S) {
-                        y += 20;
+                        model.getPlayer()->setY(model.getPlayer()->getY() + 20);
+                        std::cout << model.getPlayer()->getY() << std::endl;
                     }
                     if (event.key.code == sf::Keyboard::D) {
-                        x += 20;
+                        model.getPlayer()->setX(model.getPlayer()->getX() + 20);
+                        std::cout << model.getPlayer()->getX() << std::endl;
                     }
                     if (event.key.code == sf::Keyboard::A) {
-                        x -= 20;
+                        model.getPlayer()->setX(model.getPlayer()->getX() - 20);
+                        std::cout << model.getPlayer()->getX() << std::endl;
                     }
                     break;
 
@@ -41,10 +37,8 @@ void Controller::Gameloop() {
                     break;
             }
 
-            shape.setPosition(x, y);
-
             model.getDisplay()->getWindow().clear();
-            model.getDisplay()->getWindow().draw(shape);
+            model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
             model.getDisplay()->getWindow().display();
         }
     }
