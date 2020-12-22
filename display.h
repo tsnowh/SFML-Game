@@ -9,7 +9,7 @@ class Display {
     //sf::RenderWindow window; 
     sf::RenderWindow window;
   public:
-    Display();
+    Display(unsigned int width = 500, unsigned int height = 500);
     sf::RenderWindow& getWindow();
 };
 
