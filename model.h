@@ -16,7 +16,7 @@ class Model {
     std::vector<std::unique_ptr<Zombie>> zombies;
 
     //helper methods
-    //double distance(int, int, int, int);
+    double distance(int, int, int, int);
   public:
     Model();
     Display * getDisplay();

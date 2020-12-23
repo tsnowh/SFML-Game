@@ -9,7 +9,7 @@ class Controller {
     Model model;
 
     //handlers
-    void KeyPressedHandler(sf::Event &e);
+    void KeyPressedHandler();
   public:
     Controller();
     void Gameloop();

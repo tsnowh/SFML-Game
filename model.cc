@@ -1,5 +1,6 @@
 #include "model.h"
 #include <iostream>
+#include <math.h>
 
 Model::Model(): display{std::make_unique<Display>()}, 
     player{std::make_unique<Player>(250, 250)} {}
@@ -27,11 +28,11 @@ void Model::removeZombie(Zombie *z) {
     }
 }
 
-/*
+
 double Model::distance(int x1, int y1, int x2, int y2) {
     return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
-*/
+
 
 void Model::moveZombies() {
     int move_x = 0;
@@ -40,9 +41,10 @@ void Model::moveZombies() {
     for (auto &i : zombies) {
         move_x = 0;
         move_y = 0;
-        //move_x = player->getX() - i.getX();
-        //move_y = player->getY() - i.getY();
-        //scale = 1 / distance(i.getX(), i.getY(), player->getX(), player->getY());
+        //move_x = player->getX() - i->getX();
+        //move_y = player->getY() - i->getY();
+        //scale = 1 / distance(i->getX(), i->getY(), player->getX(), player->getY());
+        
         if (player->getX() > i->getX()) {
             move_x = 5;
         } else if (player->getX() < i->getX()) {
@@ -54,6 +56,7 @@ void Model::moveZombies() {
         } else if (player->getY() < i->getY()) {
             move_y = -5;
         }
+        
 
         i->setX(i->getX() + move_x);
         i->setY(i->getY() + move_y);
@@ -62,7 +65,7 @@ void Model::moveZombies() {
 
 void Model::drawZombies() {
     moveZombies();
-    std::cout << "drawing" << std::endl;
+    //std::cout << "drawing" << std::endl;
     for (auto &i: zombies) {
         getDisplay()->getWindow().draw(i->draw());
     }
