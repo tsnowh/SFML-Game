@@ -13,6 +13,12 @@ void Controller::Gameloop() {
     model.addZombie(z.get());
     model.addZombie(z2.get());
 
+    sf::Clock clock;
+    sf::Time dt = clock.restart();
+
+    model.drawZombies();
+    model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
+
     while (model.getDisplay()->getWindow().isOpen()) {
 
         while (model.getDisplay()->getWindow().pollEvent(event)) {
@@ -26,7 +32,10 @@ void Controller::Gameloop() {
 
         KeyPressedHandler();
 
-        model.moveZombies();
+        if (dt.asSeconds() > 10000000000) {
+            model.moveZombies();
+            dt = clock.restart();
+        }
         model.drawZombies();
         model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
         model.getDisplay()->getWindow().display();
@@ -49,4 +58,5 @@ void Controller::KeyPressedHandler() {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { //Move Left
         model.getPlayer()->setX(model.getPlayer()->getX() - 1);
     }
+    std::cout << model.getPlayer()->getX() << ", " << model.getPlayer()->getY() << std::endl;
 }

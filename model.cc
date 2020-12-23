@@ -3,7 +3,7 @@
 #include <math.h>
 
 Model::Model(): display{std::make_unique<Display>()}, 
-    player{std::make_unique<Player>(250, 250)} {}
+    player{std::make_unique<Player>(500, 500)} {}
 
 Display * Model::getDisplay() {
     return display.get();
@@ -46,20 +46,18 @@ void Model::moveZombies() {
         //scale = 1 / distance(i->getX(), i->getY(), player->getX(), player->getY());
         
         if (player->getX() > i->getX()) {
-            move_x = 5;
+            i->setX(i->getX() + 1);
         } else if (player->getX() < i->getX()) {
-            move_x = -5;
+            i->setX(i->getX() - 1);
         }
 
         if (player->getY() > i->getY()) {
-            move_y = 5;
+            i->setY(i->getY() + 1);
         } else if (player->getY() < i->getY()) {
-            move_y = -5;
+            i->setY(i->getY() - 1);
         }
-        
-
-        i->setX(i->getX() + move_x);
-        i->setY(i->getY() + move_y);
+        i->draw();
+        //std::cout << distance(i->getX(), i->getY(), player->getX(), player->getY()) << std::endl;
     }
 }
 
