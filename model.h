@@ -17,6 +17,7 @@ class Model {
 
     //helper methods
     double distance(int, int, int, int);
+    sf::Vector2f normalize(const sf::Vector2f&);
   public:
     Model();
     Display * getDisplay();

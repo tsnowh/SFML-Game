@@ -33,36 +33,26 @@ double Model::distance(int x1, int y1, int x2, int y2) {
     return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
+sf::Vector2f Model::normalize(const sf::Vector2f& source) {
+    float length = sqrt((source.x * source.x) + (source.y * source.y));
+    if (length != 0)
+        return sf::Vector2f(source.x / length, source.y / length);
+    else
+        return source;
+}
+
 
 void Model::moveZombies() {
-    int move_x = 0;
-    int move_y = 0;
-    double scale; 
+    sf::Vector2f direction; 
     for (auto &i : zombies) {
-        move_x = 0;
-        move_y = 0;
-        //move_x = player->getX() - i->getX();
-        //move_y = player->getY() - i->getY();
-        //scale = 1 / distance(i->getX(), i->getY(), player->getX(), player->getY());
-        
-        if (player->getX() > i->getX()) {
-            i->setX(i->getX() + 1);
-        } else if (player->getX() < i->getX()) {
-            i->setX(i->getX() - 1);
-        }
+        direction = normalize(player->getPosition() - i->getPosition());
 
-        if (player->getY() > i->getY()) {
-            i->setY(i->getY() + 1);
-        } else if (player->getY() < i->getY()) {
-            i->setY(i->getY() - 1);
-        }
-        i->draw();
-        //std::cout << distance(i->getX(), i->getY(), player->getX(), player->getY()) << std::endl;
+        i->setPosition(i->getPosition() + (i->getSpeed() * direction));
     }
 }
 
 void Model::drawZombies() {
-    moveZombies();
+    //moveZombies();
     //std::cout << "drawing" << std::endl;
     for (auto &i: zombies) {
         getDisplay()->getWindow().draw(i->draw());

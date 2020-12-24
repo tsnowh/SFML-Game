@@ -25,6 +25,8 @@ class Enemy {
 
     sf::Vector2f getPosition();
     void setPosition(sf::Vector2f);
+    float getSpeed();
+    void setSpeed(float);
 };
 
 

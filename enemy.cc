@@ -31,4 +31,12 @@ void Enemy::setPosition(sf::Vector2f i) {
     position = i;
 }
 
+float Enemy::getSpeed() {
+    return speed;
+}
+
+void Enemy::setSpeed(float i) {
+    speed = i;
+}
+
 
