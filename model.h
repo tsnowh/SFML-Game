@@ -16,7 +16,7 @@ class Model {
     std::vector<std::unique_ptr<Zombie>> zombies;
 
     //helper methods
-    double distance(int, int, int, int);
+    float distance(const sf::Vector2f&);
     sf::Vector2f normalize(const sf::Vector2f&);
   public:
     Model();

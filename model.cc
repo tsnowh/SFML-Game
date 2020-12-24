@@ -29,12 +29,12 @@ void Model::removeZombie(Zombie *z) {
 }
 
 
-double Model::distance(int x1, int y1, int x2, int y2) {
-    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+float Model::distance(const sf::Vector2f& source) {
+    return sqrt((source.x * source.x) + (source.y * source.y));
 }
 
 sf::Vector2f Model::normalize(const sf::Vector2f& source) {
-    float length = sqrt((source.x * source.x) + (source.y * source.y));
+    float length = distance(source);
     if (length != 0) {
         //std::cout << length << std::endl;
         return sf::Vector2f(source.x / length, source.y / length);
@@ -48,13 +48,18 @@ void Model::moveZombies() {
     float move_x = 0;
     float move_y = 0;
     sf::Vector2f direction;
-    sf::Vector2f velocity;  
+    sf::Vector2f velocity;
+    sf::Vector2f vec;  
     for (auto &i : zombies) {
-        direction = normalize(player->getPos() - i->getPos());
+        vec = player->getPos() - i->getPos();
+        direction = normalize(vec);
         velocity = direction * i->getSpeed();
 
         i->setPos(i->getPos() + velocity);
         i->draw();
+        if (distance(vec) <= (float)i->getRadius() + player->getRadius()) {
+            i->attack(player.get());
+        }
     }
 }
 
