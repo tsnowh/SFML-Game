@@ -3,7 +3,7 @@
 #include <math.h>
 
 Model::Model(): display{std::make_unique<Display>()}, 
-    player{std::make_unique<Player>(sf::Vector2f(500, 500), 1.0 / 30.0)} {}
+    player{std::make_unique<Player>(sf::Vector2f(250, 250), 1.0)} {}
 
 Display * Model::getDisplay() {
     return display.get();
@@ -35,19 +35,26 @@ double Model::distance(int x1, int y1, int x2, int y2) {
 
 sf::Vector2f Model::normalize(const sf::Vector2f& source) {
     float length = sqrt((source.x * source.x) + (source.y * source.y));
-    if (length != 0)
+    if (length != 0) {
+        //std::cout << length << std::endl;
         return sf::Vector2f(source.x / length, source.y / length);
-    else
+    } else {
         return source;
+    }
 }
 
 
 void Model::moveZombies() {
-    sf::Vector2f direction; 
+    float move_x = 0;
+    float move_y = 0;
+    sf::Vector2f direction;
+    sf::Vector2f velocity;  
     for (auto &i : zombies) {
-        direction = normalize(player->getPosition() - i->getPosition());
+        direction = normalize(player->getPos() - i->getPos());
+        velocity = direction * i->getSpeed();
 
-        i->setPosition(i->getPosition() + (i->getSpeed() * direction));
+        i->setPos(i->getPos() + velocity);
+        i->draw();
     }
 }
 

@@ -23,11 +23,11 @@ void Enemy::setY(int i) {
     position.y = i;
 }
 
-sf::Vector2f Enemy::getPosition() {
+sf::Vector2f Enemy::getPos() {
     return position;
 }
 
-void Enemy::setPosition(sf::Vector2f i) {
+void Enemy::setPos(sf::Vector2f i) {
     position = i;
 }
 

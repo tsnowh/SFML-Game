@@ -8,7 +8,7 @@ void Controller::Gameloop() {
 
     std::unique_ptr<Zombie> z;
     //std::unique_ptr<Zombie> z2;
-    z = std::make_unique<Zombie>(sf::Vector2f(rand() % 500, rand() % 500), 1);
+    z = std::make_unique<Zombie>(sf::Vector2f(rand() % 500, rand() % 500), 0.5);
     //z2 = std::make_unique<Zombie>(rand() % 500, rand() % 500);
     model.addZombie(z.get());
     //model.addZombie(z2.get());
@@ -36,8 +36,8 @@ void Controller::Gameloop() {
             model.moveZombies();
             dt = clock.restart();
         //}
-        model.drawZombies();
         model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
+        model.drawZombies();
         model.getDisplay()->getWindow().display();
     }
 }
@@ -45,22 +45,22 @@ void Controller::Gameloop() {
 void Controller::KeyPressedHandler() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { //Move Up
         //model.getPlayer()->setY(model.getPlayer()->getY() - 1);
-        model.getPlayer()->setPosition(model.getPlayer()->getPosition() + sf::Vector2f(0, -1));
+        model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(0, -1)));
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { //Move Down
         //model.getPlayer()->setY(model.getPlayer()->getY() + 1);
-        model.getPlayer()->setPosition(model.getPlayer()->getPosition() + sf::Vector2f(0, 1));
+        model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(0, 1)));
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { //Move Right
         //model.getPlayer()->setX(model.getPlayer()->getX() + 1);
-        model.getPlayer()->setPosition(model.getPlayer()->getPosition() + sf::Vector2f(1, 0));
+        model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(1, 0)));
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { //Move Left
         //model.getPlayer()->setX(model.getPlayer()->getX() - 1);
-        model.getPlayer()->setPosition(model.getPlayer()->getPosition() + sf::Vector2f(-1, 0));
+        model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(-1, 0)));
     }
     //std::cout << model.getPlayer()->getX() << ", " << model.getPlayer()->getY() << std::endl;
 }

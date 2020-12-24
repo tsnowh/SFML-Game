@@ -23,8 +23,8 @@ class Enemy {
     int getY();
     void setY(int);
 
-    sf::Vector2f getPosition();
-    void setPosition(sf::Vector2f);
+    sf::Vector2f getPos();
+    void setPos(sf::Vector2f);
     float getSpeed();
     void setSpeed(float);
 };
