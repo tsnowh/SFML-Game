@@ -1,6 +1,6 @@
 #include "model.h"
 #include <iostream>
-#include <math.h>
+#include "physics.h"
 
 Model::Model(): display{std::make_unique<Display>()}, 
     player{std::make_unique<Player>(sf::Vector2f(250, 250), 1.0)} {}
@@ -15,7 +15,7 @@ Player * Model::getPlayer() {
 
 void Model::addZombie(Zombie *z) {
     zombies.emplace_back(std::unique_ptr<Zombie>(z));
-    std::cout << "added zombie " << zombies.size() << std::endl;
+    //std::cout << "added zombie " << zombies.size() << std::endl;
 }
 
 void Model::removeZombie(Zombie *z) {
@@ -27,22 +27,6 @@ void Model::removeZombie(Zombie *z) {
         zombies.erase(it);
     }
 }
-
-
-float Model::distance(const sf::Vector2f& source) {
-    return sqrt((source.x * source.x) + (source.y * source.y));
-}
-
-sf::Vector2f Model::normalize(const sf::Vector2f& source) {
-    float length = distance(source);
-    if (length != 0) {
-        //std::cout << length << std::endl;
-        return sf::Vector2f(source.x / length, source.y / length);
-    } else {
-        return source;
-    }
-}
-
 
 void Model::moveZombies() {
     float move_x = 0;
@@ -69,4 +53,14 @@ void Model::drawZombies() {
     for (auto &i: zombies) {
         getDisplay()->getWindow().draw(i->draw());
     }
+}
+
+void Model::drawProjectiles() {
+    //try{
+        for (int i = 0; i < player->getNumProjectiles(); ++i) {
+            getDisplay()->getWindow().draw(player->getProjectile(i)->draw());
+        }
+    //} catch ( ... ) {
+
+    //}
 }

@@ -15,9 +15,6 @@ class Model {
     std::unique_ptr<Player> player;
     std::vector<std::unique_ptr<Zombie>> zombies;
 
-    //helper methods
-    float distance(const sf::Vector2f&);
-    sf::Vector2f normalize(const sf::Vector2f&);
   public:
     Model();
     Display * getDisplay();
@@ -28,7 +25,7 @@ class Model {
     void removeZombie(Zombie *);
     void moveZombies();
     void drawZombies();
-
+    void drawProjectiles();
 };
 
 #endif
