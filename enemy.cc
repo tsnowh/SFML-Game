@@ -1,26 +1,34 @@
 #include "enemy.h"
 #include "weapon.h"
 
-Enemy::Enemy(int health, int x, int y, State state): health{health}, x{x}, y{y}, state{state} {}
+Enemy::Enemy(int h, sf::Vector2f pos, float speed, State state): health{h}, position{pos}, speed{speed}, state{state} {}
 
 void Enemy::getAttacked(Weapon *w) {
     health -= w->getDamage();
 }
 
 int Enemy::getX() {
-    return x;
+    return position.x;
 }
 
 void Enemy::setX(int i) {
-    x = i;
+    position.x = i;
 }
 
 int Enemy::getY() {
-    return y;
+    return position.y;
 }
 
 void Enemy::setY(int i) {
-    y = i;
+    position.y = i;
+}
+
+sf::Vector2f Enemy::getPosition() {
+    return position;
+}
+
+void Enemy::setPosition(sf::Vector2f i) {
+    position = i;
 }
 
 

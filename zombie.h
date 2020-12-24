@@ -7,7 +7,7 @@ class Zombie: public Enemy {
   private:
     sf::CircleShape shape;
   public:
-    Zombie(int x, int y);
+    Zombie(sf::Vector2f pos, float speed);
     //void getAttacked (Weapon *) override;
 
     sf::CircleShape draw();

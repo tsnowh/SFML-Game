@@ -1,6 +1,8 @@
 #ifndef __ENEMY_H__
 #define __ENEMY_H__
 
+#include <SFML/Graphics.hpp>
+
 enum State {Alive, Dead};
 
 class Weapon;
@@ -9,10 +11,10 @@ class Enemy {
   private:
     State state;
     int health;
-    int x; 
-    int y;
+    sf::Vector2f position;
+    float speed;
   public:
-    Enemy(int h, int x, int y, State = State::Alive);
+    Enemy(int h, sf::Vector2f pos, float speed, State = State::Alive);
     virtual void getAttacked (Weapon *);
 
     // getters / setters
@@ -20,6 +22,9 @@ class Enemy {
     void setX(int);
     int getY();
     void setY(int);
+
+    sf::Vector2f getPosition();
+    void setPosition(sf::Vector2f);
 };
 
 

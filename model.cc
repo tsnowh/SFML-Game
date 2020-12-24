@@ -3,7 +3,7 @@
 #include <math.h>
 
 Model::Model(): display{std::make_unique<Display>()}, 
-    player{std::make_unique<Player>(500, 500)} {}
+    player{std::make_unique<Player>(sf::Vector2f(500, 500), 1.0 / 30.0)} {}
 
 Display * Model::getDisplay() {
     return display.get();

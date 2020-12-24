@@ -1,13 +1,13 @@
 #include "zombie.h"
 
-Zombie::Zombie(int x, int y): Enemy(20, x, y), shape{sf::CircleShape(10)} {
+Zombie::Zombie(sf::Vector2f pos, float speed): Enemy(20, pos, speed), shape{sf::CircleShape(10)} {
     shape.setFillColor(sf::Color::Red);
-    shape.setOrigin (x, y);
-    shape.setPosition(x, y);
+    shape.setOrigin (pos);
+    shape.setPosition(pos);
 }
 
 sf::CircleShape Zombie::draw() {
-    shape.setPosition(getX(), getY());
+    shape.setPosition(getPosition());
     return shape;
 }
 

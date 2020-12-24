@@ -1,10 +1,10 @@
 #include "player.h"
 
 // hard coded position for now
-Player::Player(int x, int y): Enemy(100, x, y), shape{sf::CircleShape(20)} {
+Player::Player(sf::Vector2f pos, float speed): Enemy(100, pos, speed), shape{sf::CircleShape(20)} {
+    shape.setOrigin (pos);
+    shape.setPosition(pos);
     shape.setFillColor(sf::Color::Green);
-    shape.setOrigin (x, y);
-    shape.setPosition(x, y);
 }
 
 /*
@@ -14,6 +14,6 @@ void Player::getAttacked (Weapon *) {
 */
 
 sf::CircleShape Player::draw() {
-    shape.setPosition(getX(), getY());
+    shape.setPosition(getPosition());
     return shape;
 }

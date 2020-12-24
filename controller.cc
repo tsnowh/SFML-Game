@@ -7,11 +7,11 @@ void Controller::Gameloop() {
     sf::Event event;
 
     std::unique_ptr<Zombie> z;
-    std::unique_ptr<Zombie> z2;
-    z = std::make_unique<Zombie>(rand() % 500, rand() % 500);
-    z2 = std::make_unique<Zombie>(rand() % 500, rand() % 500);
+    //std::unique_ptr<Zombie> z2;
+    z = std::make_unique<Zombie>(sf::Vector2f(rand() % 500, rand() % 500), 1.0 / 30.0);
+    //z2 = std::make_unique<Zombie>(rand() % 500, rand() % 500);
     model.addZombie(z.get());
-    model.addZombie(z2.get());
+    //model.addZombie(z2.get());
 
     sf::Clock clock;
     sf::Time dt = clock.restart();
@@ -58,5 +58,5 @@ void Controller::KeyPressedHandler() {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { //Move Left
         model.getPlayer()->setX(model.getPlayer()->getX() - 1);
     }
-    std::cout << model.getPlayer()->getX() << ", " << model.getPlayer()->getY() << std::endl;
+    //std::cout << model.getPlayer()->getX() << ", " << model.getPlayer()->getY() << std::endl;
 }

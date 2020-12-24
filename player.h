@@ -7,7 +7,7 @@ class Player: public Enemy {
   private:
     sf::CircleShape shape;
   public:
-    Player(int x, int y);
+    Player(sf::Vector2f pos, float speed);
     //void getAttacked (Weapon *) override;
 
     sf::CircleShape draw();
