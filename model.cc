@@ -2,8 +2,8 @@
 #include <iostream>
 #include "physics.h"
 
-Model::Model(): display{std::make_unique<Display>()}, 
-    player{std::make_unique<Player>(sf::Vector2f(250, 250), 1.0)} {}
+Model::Model(int width, int height, float playerSpeed): display{std::make_unique<Display>(width, height)}, 
+    player{std::make_unique<Player>(sf::Vector2f(width / 2, height / 2), playerSpeed)} {}
 
 Display * Model::getDisplay() {
     return display.get();

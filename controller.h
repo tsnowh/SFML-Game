@@ -7,11 +7,13 @@
 class Controller {
   private:
     Model model;
+    int width;
+    int height;
 
     //handlers
     void KeyPressedHandler();
   public:
-    Controller();
+    Controller(int width, int height);
     void Gameloop();
 };
 

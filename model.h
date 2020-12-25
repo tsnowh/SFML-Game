@@ -16,7 +16,7 @@ class Model {
     std::vector<std::unique_ptr<Zombie>> zombies;
 
   public:
-    Model();
+    Model(int width, int height, float playerSpeed = 1.0);
     Display * getDisplay();
     Player * getPlayer();
 

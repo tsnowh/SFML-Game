@@ -1,14 +1,14 @@
 #include "controller.h"
 #include <iostream>
 
-Controller::Controller() {}
+Controller::Controller(int width, int height): width{width}, height{height}, model{Model{width, height}} {}
 
 void Controller::Gameloop() {
     sf::Event event;
 
     std::unique_ptr<Zombie> z;
     //std::unique_ptr<Zombie> z2;
-    z = std::make_unique<Zombie>(sf::Vector2f(rand() % 500, rand() % 500), 0.5, 10);
+    z = std::make_unique<Zombie>(sf::Vector2f(rand() % width, rand() % height), 0.5, 10);
     //z2 = std::make_unique<Zombie>(rand() % 500, rand() % 500);
     model.addZombie(z.get());
     //model.addZombie(z2.get());
