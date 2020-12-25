@@ -14,7 +14,7 @@ Player::Player(sf::Vector2f pos, float speed): Enemy(100, pos, speed, 500), shap
 
 void Player::getAttacked (Weapon *w) {
     setHealth(getHealth() - w->getDamage());
-    std::cout << "OUCH " << getHealth() << std::endl; 
+    //std::cout << "OUCH " << getHealth() << std::endl; 
     reEvaluateState();
 }
 
@@ -35,8 +35,10 @@ float Player::getRadius() {
     return shape.getRadius();
 }
 
-void Player::addProjectile(Projectile *w) {
-    projectiles.emplace_back(std::unique_ptr<Projectile>(w));
+void Player::addProjectile(std::unique_ptr<Projectile> p) {
+    //std::unique_ptr<Projectile> z;
+    //z = std::make_unique<Projectile>(getPos(), normalize(getPos()), 100.0, 1.0, 20);
+    if (p) projectiles.push_back(std::move(p));
 }
 
 void Player::deleteProjectile(Projectile *w) {
@@ -45,7 +47,9 @@ void Player::deleteProjectile(Projectile *w) {
 
     if (it != projectiles.end()) {
         //int i = projectiles.end() - it;
+        std::cout << projectiles.size() << " size before delete" << std::endl;
         projectiles.erase(it);
+        std::cout << projectiles.size() << " size after delete" << std::endl;
     }
 }
 
@@ -60,21 +64,17 @@ int Player::getNumProjectiles() {
 
 
 void Player::shoot() {
-    std::unique_ptr<Projectile> z;
-    z = std::make_unique<Projectile>(getPos(), normalize(getPos()), 100.0, 3.0, 20);
-    addProjectile(z.get());
+    addProjectile(std::move(std::make_unique<Projectile>(this, getPos(), sf::Vector2f(1.0, 0), 200.0, 1.0, 20)));
 }
 
 void Player::moveProjectiles() {
+    if (projectiles.size() == 0) return;
     for (auto &i : projectiles) {
-        bool del = i->move();
-        if(!del) {
-
-        } else {
-            //int pos = projectiles.end() - i;
-            deleteProjectile(i.get());
-        }
+        if (i) i->move();
     }
 }
 
+void Player::notify (Projectile * w) {
+    deleteProjectile(w);
+}
 

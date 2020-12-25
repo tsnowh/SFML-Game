@@ -1,6 +1,8 @@
 #include "weapon.h"
 
 
+Weapon::Weapon(int damage, Enemy * owner): damage{damage}, owner{owner} {}
+
 Weapon::Weapon(int damage): damage{damage} {}
 
 void Weapon::attack(Enemy *enemy) {
@@ -11,8 +13,12 @@ int Weapon::getDamage() {
     return damage;
 }
 
-Projectile::Projectile(sf::Vector2f pos, sf::Vector2f direc, float range, float speed, int damage) :
-        Enemy(0, pos, speed, 5), Weapon(damage), shape{sf::CircleShape(5)}, direction{direc}, range{range} {
+Enemy * Weapon::getOwner() {
+    return owner;
+}
+
+Projectile::Projectile(Enemy * owner, sf::Vector2f pos, sf::Vector2f direc, float range, float speed, int damage) :
+        Enemy(0, pos, speed, 5), Weapon(damage, owner), shape{sf::CircleShape(5)}, direction{direc}, range{range} {
     shape.setRadius(5);
     shape.setOrigin ({shape.getRadius(), shape.getRadius()});
     this->setPos(pos);
@@ -25,16 +31,18 @@ sf::CircleShape Projectile::draw() {
     return shape;
 }
 
-bool Projectile::move() {
+void Projectile::move() {
+    if (this == nullptr) throw;
     sf::Vector2f velocity;
     velocity = direction * getSpeed();
     distance += getSpeed();
-    if (distance >= range) return true;
+    if (distance >= range) getOwner()->notify(this);
     setPos(getPos() + velocity);
     draw();
-    return false;
 }
 
 void Projectile::getAttacked (Weapon *) {}
 
 void Projectile::attack (Enemy *) {}
+
+void Projectile::notify (Projectile *) {}

@@ -17,9 +17,10 @@ class Player: public Enemy {
     void getAttacked (Weapon *) override;
     void attack (Enemy *) override;
     void reEvaluateState () override;
+    void notify (Projectile *) override;
     float getRadius();
 
-    void addProjectile(Projectile *);
+    void addProjectile(std::unique_ptr<Projectile>);
     void deleteProjectile(Projectile *);
     Projectile * getProjectile(int i);
     int getNumProjectiles();

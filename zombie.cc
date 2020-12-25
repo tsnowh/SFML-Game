@@ -23,6 +23,7 @@ void Zombie::getAttacked (Weapon *w) {
     reEvaluateState();
 }
 
+void Zombie::notify (Projectile *) {}
 
 void Zombie::attack (Enemy *e) {
     e->getAttacked(&weapon);

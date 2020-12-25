@@ -13,6 +13,7 @@ class Zombie: public Enemy {
     void getAttacked (Weapon *) override;
     void attack (Enemy *) override;
     void reEvaluateState () override;
+    void notify (Projectile *) override;
     float getRadius();
 
     sf::CircleShape draw();

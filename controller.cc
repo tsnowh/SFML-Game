@@ -32,9 +32,14 @@ void Controller::Gameloop() {
 
         KeyPressedHandler();
 
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && clock.getElapsedTime().asSeconds() > 0.1) { //shoot
+            model.getPlayer()->shoot();
+            clock.restart();
+        }   
+
         //if (dt.asSeconds() > 10000000000) {
             model.moveZombies();
-            dt = clock.restart();
+           // dt = clock.restart();
         //}
         model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
         model.drawZombies();
@@ -63,10 +68,6 @@ void Controller::KeyPressedHandler() {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { //Move Left
         //model.getPlayer()->setX(model.getPlayer()->getX() - 1);
         model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(-1, 0)));
-    }
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) { //shoot
-        model.getPlayer()->shoot();
     }
     //std::cout << model.getPlayer()->getX() << ", " << model.getPlayer()->getY() << std::endl;
 }
