@@ -64,7 +64,7 @@ int Player::getNumProjectiles() {
 
 
 void Player::shoot() {
-    addProjectile(std::move(std::make_unique<Projectile>(this, getPos(), sf::Vector2f(1.0, 0), 200.0, 1.0, 20)));
+    addProjectile(std::move(std::make_unique<Projectile>(this, getPos(), normalize(getPos()), 200.0, 1.0, 20)));
 }
 
 void Player::moveProjectiles() {
