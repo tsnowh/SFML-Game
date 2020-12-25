@@ -51,13 +51,21 @@ void Controller::Gameloop() {
 
 void Controller::KeyPressedHandler() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { //Move Up
-        //model.getPlayer()->setY(model.getPlayer()->getY() - 1);
-        model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(0, -1)));
+        if ((model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(0, -1))).y <= 0.0) {
+            model.getPlayer()->setPos(sf::Vector2f(model.getPlayer()->getPos().x, 0.0f)); // + sf::Vector2f(0, -1 * model.getPlayer()->getPos().y));
+        } else {
+            //model.getPlayer()->setY(model.getPlayer()->getY() - 1);
+            model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(0, -1)));
+        }
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { //Move Down
-        //model.getPlayer()->setY(model.getPlayer()->getY() + 1);
-        model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(0, 1)));
+        if ((model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(0, -1))).y >= float(height)) {
+            model.getPlayer()->setPos(model.getPlayer()->getPos() + sf::Vector2f(0, -1 * model.getPlayer()->getPos().y));
+        } else {
+            //model.getPlayer()->setY(model.getPlayer()->getY() + 1);
+            model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(0, 1)));
+        }
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { //Move Right
