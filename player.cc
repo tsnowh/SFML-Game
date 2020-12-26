@@ -2,9 +2,10 @@
 #include "weapon.h"
 #include <iostream>
 #include "physics.h"
+#include "model.h"
 
 // hard coded position for now
-Player::Player(sf::Vector2f pos, float speed): Enemy(100, pos, speed, 500), shape{sf::CircleShape(20)} {
+Player::Player(Model *model, sf::Vector2f pos, float speed): Enemy(100, pos, speed, 500), shape{sf::CircleShape(20)}, model{model} {
     shape.setRadius(20);
     shape.setOrigin ({shape.getRadius(), shape.getRadius()});
     this->setPos(pos);
@@ -64,13 +65,13 @@ int Player::getNumProjectiles() {
 
 
 void Player::shoot() {
-    addProjectile(std::move(std::make_unique<Projectile>(this, getPos(), normalize(getPos()), 200.0, 1.0, 20)));
+    addProjectile(std::move(std::make_unique<Projectile>(this, getPos(), normalize(getPos()), 250.0, 1.0, 20)));
 }
 
 void Player::moveProjectiles() {
     if (projectiles.size() == 0) return;
     for (auto &i : projectiles) {
-        if (i) i->move();
+        if (i) i->move(model->getWidth(), model->getHeight());
     }
 }
 

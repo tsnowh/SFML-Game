@@ -14,11 +14,16 @@ class Model {
     std::unique_ptr<Display> display;
     std::unique_ptr<Player> player;
     std::vector<std::unique_ptr<Zombie>> zombies;
+    int width;
+    int height;
 
   public:
-    Model(int width, int height, float playerSpeed = 1.0);
+    Model(int width = 500, int height = 500, float playerSpeed = 1.0);
     Display * getDisplay();
     Player * getPlayer();
+
+    int getWidth();
+    int getHeight();
 
     //Zombie methods
     void addZombie(Zombie *);

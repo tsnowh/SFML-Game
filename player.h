@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-
+class Model;
 class Weapon;
 class Projectile;
 
@@ -12,8 +12,9 @@ class Player: public Enemy {
   private:
     sf::CircleShape shape;
     std::vector<std::unique_ptr<Projectile>> projectiles;
+    Model *model;
   public:
-    Player(sf::Vector2f pos, float speed);
+    Player(Model *, sf::Vector2f pos, float speed);
     void getAttacked (Weapon *) override;
     void attack (Enemy *) override;
     void reEvaluateState () override;

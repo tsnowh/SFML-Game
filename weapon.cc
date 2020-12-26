@@ -31,13 +31,33 @@ sf::CircleShape Projectile::draw() {
     return shape;
 }
 
-void Projectile::move() {
+void Projectile::move(int width, int height) {
     if (this == nullptr) throw;
     sf::Vector2f velocity;
+    sf::Vector2f newPos;
     velocity = direction * getSpeed();
     distance += getSpeed();
     if (distance >= range) getOwner()->notify(this);
-    setPos(getPos() + velocity);
+
+    newPos = getPos() + velocity;
+
+    if (newPos.y <= 0) {
+        newPos.y = height;
+    }
+
+    if (newPos.y >= height) {
+        newPos.y = 0;
+    }
+
+    if (newPos.x <= 0) {
+        newPos.x = width;
+    }
+
+    if (newPos.x >= width) {
+        newPos.x = 0;
+    }
+    
+    setPos(newPos);
     draw();
 }
 

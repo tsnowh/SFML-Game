@@ -27,7 +27,7 @@ class Projectile: public Weapon, public Enemy {
   public:
     Projectile(Enemy * owner, sf::Vector2f pos, sf::Vector2f direc, float range, float speed = 1.0, int damage = 0);
     sf::CircleShape draw();
-    void move();
+    void move(int maxW, int maxH);
     void getAttacked (Weapon *) override;
     void attack (Enemy *) override;
     void notify (Projectile *) override;
