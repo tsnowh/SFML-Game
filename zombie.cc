@@ -1,6 +1,9 @@
 #include "zombie.h"
+#include <iostream>
 
-Zombie::Zombie(sf::Vector2f pos, float speed, int damage): Enemy(20, pos, speed, 10), shape{sf::CircleShape(10)}, weapon{Weapon(damage)} {
+#include "model.h"
+
+Zombie::Zombie(Model *model, sf::Vector2f pos, float speed, int damage): Enemy(20, pos, speed, 10), shape{sf::CircleShape(10)}, weapon{Weapon(damage)}, model{model} {
     shape.setFillColor(sf::Color::Red);
     shape.setOrigin ({shape.getRadius(), shape.getRadius()});
     this->setPos(pos);
@@ -16,10 +19,15 @@ void Zombie::reEvaluateState () {
     if (getHealth() <= 0) {
         setState(State::Dead);
     }
+
+    if (getState() == State::Dead) {
+        model->removeZombie(this);
+    }
 }
 
 void Zombie::getAttacked (Weapon *w) {
     setHealth(getHealth() - w->getDamage());
+    //std::cout << "OUCH zombie-projectile collision detected" << getHealth() << std::endl; 
     reEvaluateState();
 }
 

@@ -20,6 +20,7 @@ class Enemy {
     virtual void getAttacked (Weapon *) = 0;
     virtual void attack (Enemy *) = 0;
     virtual void notify (Projectile *) = 0;
+    virtual float getRadius() = 0;
     virtual void reEvaluateState ();
 
     // getters / setters

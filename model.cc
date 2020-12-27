@@ -67,8 +67,14 @@ void Model::moveZombies() {
 
         i->setPos(newPos);
         i->draw();
-        if (distance(vec) <= (float)i->getRadius() + player->getRadius()) {
+        if (collision(player.get(), i.get())) { //distance(vec) <= (float)i->getRadius() + player->getRadius()
             i->attack(player.get());
+        }
+        for (int j = 0; j < player->getNumProjectiles(); ++j) {
+            if (collision(i.get(), player->getProjectile(j))) {
+                i->attack(player->getProjectile(j));
+                player->getProjectile(j)->attack(i.get());
+            }
         }
     }
 }

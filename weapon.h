@@ -31,6 +31,8 @@ class Projectile: public Weapon, public Enemy {
     void getAttacked (Weapon *) override;
     void attack (Enemy *) override;
     void notify (Projectile *) override;
+    float getRadius() override;
+    virtual void reEvaluateState ();
 };
 
 

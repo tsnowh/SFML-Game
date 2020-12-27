@@ -15,7 +15,7 @@ Player::Player(Model *model, sf::Vector2f pos, float speed): Enemy(100, pos, spe
 
 void Player::getAttacked (Weapon *w) {
     setHealth(getHealth() - w->getDamage());
-    //std::cout << "OUCH " << getHealth() << std::endl; 
+    //std::cout << "OUCH player-zombie collision detected" << getHealth() << std::endl; 
     reEvaluateState();
 }
 

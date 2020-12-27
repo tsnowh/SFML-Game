@@ -1,4 +1,5 @@
 #include "weapon.h"
+#include <iostream>
 
 
 Weapon::Weapon(int damage, Enemy * owner): damage{damage}, owner{owner} {}
@@ -18,7 +19,7 @@ Enemy * Weapon::getOwner() {
 }
 
 Projectile::Projectile(Enemy * owner, sf::Vector2f pos, sf::Vector2f direc, float range, float speed, int damage) :
-        Enemy(0, pos, speed, 5), Weapon(damage, owner), shape{sf::CircleShape(5)}, direction{direc}, range{range} {
+        Enemy(1, pos, speed, 5), Weapon(damage, owner), shape{sf::CircleShape(5)}, direction{direc}, range{range} {
     shape.setRadius(5);
     shape.setOrigin ({shape.getRadius(), shape.getRadius()});
     this->setPos(pos);
@@ -29,6 +30,10 @@ Projectile::Projectile(Enemy * owner, sf::Vector2f pos, sf::Vector2f direc, floa
 sf::CircleShape Projectile::draw() {
     shape.setPosition(getPos());
     return shape;
+}
+
+float Projectile::getRadius() {
+    return shape.getRadius();
 }
 
 void Projectile::move(int width, int height) {
@@ -61,8 +66,26 @@ void Projectile::move(int width, int height) {
     draw();
 }
 
-void Projectile::getAttacked (Weapon *) {}
+void Projectile::getAttacked (Weapon *w) {
+    setHealth(getHealth() - w->getDamage());
+    //std::cout << "OUCH projectile-zombie collision detected" << getHealth() << std::endl; 
+    reEvaluateState();
+}
 
-void Projectile::attack (Enemy *) {}
+void Projectile::attack (Enemy *e) {
+    e->getAttacked(this);
+}
 
-void Projectile::notify (Projectile *) {}
+void Projectile::notify (Projectile *) {
+
+}
+
+void Projectile::reEvaluateState () {
+    if (getHealth() <= 0) {
+        setState(State::Dead);
+    }
+
+    if (getState() == State::Dead) {
+        getOwner()->notify(this);
+    }
+}
