@@ -17,9 +17,8 @@ class Enemy {
     int attackRange;
   public:
     Enemy(int h, sf::Vector2f pos, float speed, int attackRange, State = State::Alive);
-    virtual void getAttacked (Weapon *) = 0;
-    virtual void getAttacked (Weapon *, bool) = 0;
-    virtual void attack (Enemy *) = 0;
+    virtual void getAttacked (Weapon *, bool = true) = 0;
+    virtual void attack (Enemy *, bool = true) = 0;
     virtual void notify (Projectile *) = 0;
     virtual float getRadius() = 0;
     virtual void reEvaluateState ();

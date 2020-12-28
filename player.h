@@ -17,9 +17,8 @@ class Player: public Enemy {
     Model *model;
   public:
     Player(Model *, sf::Vector2f pos, float speed);
-    void getAttacked (Weapon *) override;
-    void getAttacked (Weapon *, bool) override;
-    void attack (Enemy *) override;
+    void getAttacked (Weapon *, bool = true) override;
+    void attack (Enemy *, bool = true) override;
     void reEvaluateState () override;
     void notify (Projectile *) override;
     float getRadius() override;

@@ -3,8 +3,9 @@
 
 Enemy::Enemy(int h, sf::Vector2f pos, float speed, int attackRange, State state): health{h}, position{pos}, speed{speed}, state{state}, attackRange{attackRange} {}
 
-void Enemy::getAttacked(Weapon *w) {
+void Enemy::getAttacked(Weapon *w, bool reval) {
     health -= w->getDamage();
+    if (reval) reEvaluateState();
 }
 
 int Enemy::getX() {

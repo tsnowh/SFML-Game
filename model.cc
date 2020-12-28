@@ -74,10 +74,12 @@ void Model::moveZombies() {
         for (int j = 0; j < player->getNumProjectiles(); ++j) {
             try {
                 if (collision(i.get(), player->getProjectile(j))) {
-                    std::cout << "zombie-projectile1 collision " << i->getHealth() << std::endl;
-                    //i->attack(player->getProjectile(j));
-                    player->getProjectile(j)->attack(i.get());
-                    std::cout << "zombie-projectile2 collision " << i->getHealth() << std::endl;
+                    //std::cout << "zombie-projectile1 collision " << i->getHealth() << std::endl;
+                    player->getProjectile(j)->attack(i.get(), false);
+                    i->attack(player->getProjectile(j), false);
+                    player->getProjectile(j)->reEvaluateState();
+                    i->reEvaluateState();
+                    //std::cout << "zombie-projectile2 collision " << i->getHealth() << std::endl;
                 }
             } catch ( ... ) {
                 

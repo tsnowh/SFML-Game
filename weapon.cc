@@ -66,20 +66,14 @@ void Projectile::move(int width, int height) {
     draw();
 }
 
-void Projectile::getAttacked (Weapon *w) {
-    setHealth(getHealth() - w->getDamage());
-    //std::cout << "OUCH projectile-zombie collision detected" << getHealth() << std::endl; 
-    reEvaluateState();
-}
-
 void Projectile::getAttacked (Weapon *w, bool reval) {
     setHealth(getHealth() - w->getDamage());
 
     if (reval) reEvaluateState();
 }
 
-void Projectile::attack (Enemy *e) {
-    e->getAttacked(this);
+void Projectile::attack (Enemy *e, bool reval) {
+    e->getAttacked(this, reval);
 }
 
 void Projectile::notify (Projectile *) {

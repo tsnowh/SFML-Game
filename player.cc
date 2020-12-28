@@ -13,19 +13,13 @@ Player::Player(Model *model, sf::Vector2f pos, float speed): Enemy(100, pos, spe
     shape.setFillColor(sf::Color::Green);
 }
 
-void Player::getAttacked (Weapon *w) {
-    setHealth(getHealth() - w->getDamage());
-    //std::cout << "OUCH player-zombie collision detected" << getHealth() << std::endl; 
-    reEvaluateState();
-}
-
 void Player::getAttacked (Weapon *w, bool reval) {
     setHealth(getHealth() - w->getDamage());
    
     if (reval) reEvaluateState();
 }
 
-void Player::attack (Enemy *e) {}
+void Player::attack (Enemy *e, bool reval) {}
 
 void Player::reEvaluateState () {
     if (getHealth() <= 0) {

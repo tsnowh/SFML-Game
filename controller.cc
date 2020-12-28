@@ -38,7 +38,7 @@ void Controller::Gameloop() {
             shoot_clock.restart();
         }   
 
-        if (zombie_clock.getElapsedTime().asSeconds() > 1) {
+        if (zombie_clock.getElapsedTime().asSeconds() > 3) {
             model.addZombie(std::make_unique<Zombie>(&model, sf::Vector2f(rand() % width, rand() % height), 0.5, 10));
             zombie_clock.restart();
         }

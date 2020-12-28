@@ -25,12 +25,6 @@ void Zombie::reEvaluateState () {
     }
 }
 
-void Zombie::getAttacked (Weapon *w) {
-    setHealth(getHealth() - w->getDamage());
-    //std::cout << "OUCH zombie-projectile collision detected" << getHealth() << std::endl; 
-    reEvaluateState();
-}
-
 void Zombie::getAttacked (Weapon *w, bool reval) {
     setHealth(getHealth() - w->getDamage());
     
@@ -39,8 +33,8 @@ void Zombie::getAttacked (Weapon *w, bool reval) {
 
 void Zombie::notify (Projectile *) {}
 
-void Zombie::attack (Enemy *e) {
-    e->getAttacked(&weapon);
+void Zombie::attack (Enemy *e, bool reval) {
+    e->getAttacked(&weapon, reval);
 }
 
 float Zombie::getRadius() {
