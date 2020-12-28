@@ -34,9 +34,9 @@ void Controller::Gameloop() {
         KeyPressedHandler();
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && shoot_clock.getElapsedTime().asSeconds() > 0.3) { //shoot
-            model.getPlayer()->shoot();
+            model.getPlayer()->shoot((sf::Vector2f)sf::Mouse::getPosition(model.getDisplay()->getWindow()));
             shoot_clock.restart();
-        }   
+        }
 
         if (zombie_clock.getElapsedTime().asSeconds() > 3) {
             model.addZombie(std::make_unique<Zombie>(&model, sf::Vector2f(rand() % width, rand() % height), 0.5, 10));

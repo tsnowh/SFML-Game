@@ -27,7 +27,7 @@ class Player: public Enemy {
     void deleteProjectile(Projectile *);
     Projectile * getProjectile(int i);
     int getNumProjectiles();
-    void shoot();
+    void shoot(sf::Vector2f mpos);
     void moveProjectiles();
 
     sf::CircleShape draw();
