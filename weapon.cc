@@ -46,20 +46,16 @@ void Projectile::move(int width, int height) {
 
     newPos = getPos() + velocity;
 
-    if (newPos.y <= 0) {
-        newPos.y = height;
+    if (newPos.y <= 0.0) {
+        newPos.y = (float)height;
+    } else if (newPos.y >= (float)height) {
+        newPos.y = 0.0;
     }
 
-    if (newPos.y >= height) {
-        newPos.y = 0;
-    }
-
-    if (newPos.x <= 0) {
-        newPos.x = width;
-    }
-
-    if (newPos.x >= width) {
-        newPos.x = 0;
+    if (newPos.x <= 0.0) {
+        newPos.x = (float)width;
+    } else if (newPos.x >= (float)width) {
+        newPos.x = 0.0;
     }
     
     setPos(newPos);

@@ -65,8 +65,8 @@ int Player::getNumProjectiles() {
 
 
 void Player::shoot(sf::Vector2f mpos) {
-    std::cout << mpos.x << " " << mpos.y << std::endl; 
-    addProjectile(std::move(std::make_unique<Projectile>(this, getPos(), normalize(mpos - getPos()), 250.0, 1.0, 20)));
+    //std::cout << mpos.x << " " << mpos.y << std::endl; 
+    addProjectile(std::move(std::make_unique<Projectile>(this, getPos(), normalize(mpos - getPos()), 450.0, 2.0, 20)));
 }
 
 void Player::moveProjectiles() {
