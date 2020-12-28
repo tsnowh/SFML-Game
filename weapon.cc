@@ -72,6 +72,12 @@ void Projectile::getAttacked (Weapon *w) {
     reEvaluateState();
 }
 
+void Projectile::getAttacked (Weapon *w, bool reval) {
+    setHealth(getHealth() - w->getDamage());
+
+    if (reval) reEvaluateState();
+}
+
 void Projectile::attack (Enemy *e) {
     e->getAttacked(this);
 }

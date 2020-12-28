@@ -26,7 +26,7 @@ class Model {
     int getHeight();
 
     //Zombie methods
-    void addZombie(Zombie *);
+    void addZombie(std::unique_ptr<Zombie>);
     void removeZombie(Zombie *);
     void moveZombies();
     void drawZombies();

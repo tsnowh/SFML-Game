@@ -14,6 +14,7 @@ class Zombie: public Enemy {
   public:
     Zombie(Model *, sf::Vector2f pos, float speed, int damage);
     void getAttacked (Weapon *) override;
+    void getAttacked (Weapon *, bool) override;
     void attack (Enemy *) override;
     void reEvaluateState () override;
     void notify (Projectile *) override;

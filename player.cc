@@ -19,6 +19,12 @@ void Player::getAttacked (Weapon *w) {
     reEvaluateState();
 }
 
+void Player::getAttacked (Weapon *w, bool reval) {
+    setHealth(getHealth() - w->getDamage());
+   
+    if (reval) reEvaluateState();
+}
+
 void Player::attack (Enemy *e) {}
 
 void Player::reEvaluateState () {
@@ -48,14 +54,14 @@ void Player::deleteProjectile(Projectile *w) {
 
     if (it != projectiles.end()) {
         //int i = projectiles.end() - it;
-        std::cout << projectiles.size() << " size before delete" << std::endl;
+        //std::cout << projectiles.size() << " size before delete" << std::endl;
         projectiles.erase(it);
-        std::cout << projectiles.size() << " size after delete" << std::endl;
+        //std::cout << projectiles.size() << " size after delete" << std::endl;
     }
 }
 
 Projectile * Player::getProjectile(int i) {
-    //if (i >= projectiles.size()) throw;
+    if (i > projectiles.size()) throw std::exception{};
     return projectiles.at(i).get();
 }
 

@@ -25,10 +25,11 @@ class Projectile: public Weapon, public Enemy {
     float distance = 0;
     float range;
   public:
-    Projectile(Enemy * owner, sf::Vector2f pos, sf::Vector2f direc, float range, float speed = 1.0, int damage = 0);
+    Projectile(Enemy * owner, sf::Vector2f pos, sf::Vector2f direc, float range, float speed = 1.0, int damage = 100);
     sf::CircleShape draw();
     void move(int maxW, int maxH);
     void getAttacked (Weapon *) override;
+    void getAttacked (Weapon *, bool) override;
     void attack (Enemy *) override;
     void notify (Projectile *) override;
     float getRadius() override;

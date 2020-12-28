@@ -21,8 +21,8 @@ int Model::getHeight() {
     return height;
 }
 
-void Model::addZombie(Zombie *z) {
-    zombies.emplace_back(std::unique_ptr<Zombie>(z));
+void Model::addZombie(std::unique_ptr<Zombie> z) {
+    if (z) zombies.push_back(std::move(z));
     //std::cout << "added zombie " << zombies.size() << std::endl;
 }
 
@@ -44,6 +44,7 @@ void Model::moveZombies() {
     sf::Vector2f vec;  
     sf::Vector2f newPos;
     for (auto &i : zombies) {
+        if (i == nullptr) continue;
         vec = player->getPos() - i->getPos();
         direction = normalize(vec);
         velocity = direction * i->getSpeed();
@@ -71,9 +72,15 @@ void Model::moveZombies() {
             i->attack(player.get());
         }
         for (int j = 0; j < player->getNumProjectiles(); ++j) {
-            if (collision(i.get(), player->getProjectile(j))) {
-                i->attack(player->getProjectile(j));
-                player->getProjectile(j)->attack(i.get());
+            try {
+                if (collision(i.get(), player->getProjectile(j))) {
+                    std::cout << "zombie-projectile1 collision " << i->getHealth() << std::endl;
+                    //i->attack(player->getProjectile(j));
+                    player->getProjectile(j)->attack(i.get());
+                    std::cout << "zombie-projectile2 collision " << i->getHealth() << std::endl;
+                }
+            } catch ( ... ) {
+                
             }
         }
     }

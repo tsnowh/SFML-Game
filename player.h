@@ -8,6 +8,8 @@ class Model;
 class Weapon;
 class Projectile;
 
+class exception;
+
 class Player: public Enemy {
   private:
     sf::CircleShape shape;
@@ -16,6 +18,7 @@ class Player: public Enemy {
   public:
     Player(Model *, sf::Vector2f pos, float speed);
     void getAttacked (Weapon *) override;
+    void getAttacked (Weapon *, bool) override;
     void attack (Enemy *) override;
     void reEvaluateState () override;
     void notify (Projectile *) override;

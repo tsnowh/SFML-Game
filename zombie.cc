@@ -31,6 +31,12 @@ void Zombie::getAttacked (Weapon *w) {
     reEvaluateState();
 }
 
+void Zombie::getAttacked (Weapon *w, bool reval) {
+    setHealth(getHealth() - w->getDamage());
+    
+    if (reval) reEvaluateState();
+}
+
 void Zombie::notify (Projectile *) {}
 
 void Zombie::attack (Enemy *e) {

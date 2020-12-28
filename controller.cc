@@ -6,15 +6,16 @@ Controller::Controller(int width, int height): width{width}, height{height}, mod
 void Controller::Gameloop() {
     sf::Event event;
 
-    std::unique_ptr<Zombie> z;
+    //std::unique_ptr<Zombie> z;
     //std::unique_ptr<Zombie> z2;
-    z = std::make_unique<Zombie>(&model, sf::Vector2f(rand() % width, rand() % height), 0.5, 10);
+    //z = std::make_unique<Zombie>(&model, sf::Vector2f(rand() % width, rand() % height), 0.5, 10);
     //z2 = std::make_unique<Zombie>(rand() % 500, rand() % 500);
-    model.addZombie(z.get());
+    //model.addZombie(z.get());
     //model.addZombie(z2.get());
 
-    sf::Clock clock;
-    sf::Time dt = clock.restart();
+    sf::Clock shoot_clock;
+    sf::Clock zombie_clock;
+    //sf::Time dt = clock.restart();
 
     model.drawZombies();
     model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
@@ -32,15 +33,17 @@ void Controller::Gameloop() {
 
         KeyPressedHandler();
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && clock.getElapsedTime().asSeconds() > 0.1) { //shoot
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && shoot_clock.getElapsedTime().asSeconds() > 0.3) { //shoot
             model.getPlayer()->shoot();
-            clock.restart();
+            shoot_clock.restart();
         }   
 
-        //if (dt.asSeconds() > 10000000000) {
-            model.moveZombies();
-           // dt = clock.restart();
-        //}
+        if (zombie_clock.getElapsedTime().asSeconds() > 1) {
+            model.addZombie(std::make_unique<Zombie>(&model, sf::Vector2f(rand() % width, rand() % height), 0.5, 10));
+            zombie_clock.restart();
+        }
+
+        model.moveZombies();
         model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
         model.drawZombies();
         model.getPlayer()->moveProjectiles();
