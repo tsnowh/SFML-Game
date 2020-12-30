@@ -3,7 +3,7 @@
 
 #include "model.h"
 
-Zombie::Zombie(Model *model, sf::Vector2f pos, float speed, int damage): Enemy(20, pos, speed, 10), shape{sf::CircleShape(10)}, weapon{Weapon(damage)}, model{model} {
+Zombie::Zombie(Model *model, sf::Vector2f pos, float speed, int damage, float attackDelay): Enemy(20, pos, speed, 10, attackDelay), shape{sf::CircleShape(10)}, weapon{Weapon(damage)}, model{model} {
     shape.setFillColor(sf::Color::Red);
     shape.setOrigin ({shape.getRadius(), shape.getRadius()});
     this->setPos(pos);
@@ -35,6 +35,7 @@ void Zombie::notify (Projectile *) {}
 
 void Zombie::attack (Enemy *e, bool reval) {
     e->getAttacked(&weapon, reval);
+    restartAttackClock();
 }
 
 float Zombie::getRadius() {

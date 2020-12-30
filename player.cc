@@ -5,7 +5,7 @@
 #include "model.h"
 
 // hard coded position for now
-Player::Player(Model *model, sf::Vector2f pos, float speed): Enemy(100, pos, speed, 500), shape{sf::CircleShape(20)}, model{model} {
+Player::Player(Model *model, sf::Vector2f pos, float speed): Enemy(100, pos, speed, 500, 0.3), shape{sf::CircleShape(20)}, model{model} {
     shape.setRadius(20);
     shape.setOrigin ({shape.getRadius(), shape.getRadius()});
     this->setPos(pos);
@@ -67,6 +67,7 @@ int Player::getNumProjectiles() {
 void Player::shoot(sf::Vector2f mpos) {
     //std::cout << mpos.x << " " << mpos.y << std::endl; 
     addProjectile(std::move(std::make_unique<Projectile>(this, getPos(), normalize(mpos - getPos()), 450.0, 2.0, 20)));
+    restartAttackClock();
 }
 
 void Player::moveProjectiles() {

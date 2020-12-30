@@ -19,7 +19,7 @@ Enemy * Weapon::getOwner() {
 }
 
 Projectile::Projectile(Enemy * owner, sf::Vector2f pos, sf::Vector2f direc, float range, float speed, int damage) :
-        Enemy(1, pos, speed, 5), Weapon(damage, owner), shape{sf::CircleShape(5)}, direction{direc}, range{range} {
+        Enemy(1, pos, speed, 5, 0), Weapon(damage, owner), shape{sf::CircleShape(5)}, direction{direc}, range{range} {
     shape.setRadius(5);
     shape.setOrigin ({shape.getRadius(), shape.getRadius()});
     this->setPos(pos);

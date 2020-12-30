@@ -12,7 +12,7 @@ class Zombie: public Enemy {
     Weapon weapon;
     Model *model;
   public:
-    Zombie(Model *, sf::Vector2f pos, float speed, int damage);
+    Zombie(Model *, sf::Vector2f pos, float speed, int damage, float attackDelay);
     void getAttacked (Weapon *, bool = true) override;
     void attack (Enemy *, bool = true) override;
     void reEvaluateState () override;

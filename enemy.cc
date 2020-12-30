@@ -1,7 +1,7 @@
 #include "enemy.h"
 #include "weapon.h"
 
-Enemy::Enemy(int h, sf::Vector2f pos, float speed, int attackRange, State state): health{h}, position{pos}, speed{speed}, state{state}, attackRange{attackRange} {}
+Enemy::Enemy(int h, sf::Vector2f pos, float speed, int attackRange, float attackDelay, State state): health{h}, position{pos}, speed{speed}, state{state}, attackRange{attackRange}, attackDelay{attackDelay} {}
 
 void Enemy::getAttacked(Weapon *w, bool reval) {
     health -= w->getDamage();
@@ -48,6 +48,21 @@ void Enemy::setState(State s) {
     state = s;
 }
 
+float Enemy::getAttackDelay() {
+    return attackDelay;
+}
+
+void Enemy::getAttackDelay(float i) {
+    attackDelay = i;
+}
+
+void Enemy::restartAttackClock() {
+    zombieAttack_clock.restart();
+}
+
+float Enemy::getAttackTime() {
+    return zombieAttack_clock.getElapsedTime().asSeconds();
+}
 
 sf::Vector2f Enemy::getPos() {
     return position;

@@ -18,6 +18,7 @@ sf::Vector2f normalize(const sf::Vector2f& source) {
 }
 
 bool collision(Enemy *e1, Enemy *e2) {
+    if (e1 == nullptr || e2 == nullptr) throw;
     if (distance(e1->getPos() - e2->getPos()) <= e1->getRadius() + e2->getRadius()) {
         return true;
     } else {

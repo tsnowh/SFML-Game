@@ -2,7 +2,7 @@
 #include <iostream>
 #include "physics.h"
 
-Model::Model(int width, int height, float playerSpeed): display{std::make_unique<Display>(width, height)}, 
+Model::Model(int width, int height, float playerSpeed): display{std::make_unique<Display>(this, width, height)}, 
     player{std::make_unique<Player>(this, sf::Vector2f(width / 2, height / 2), playerSpeed)}, width{width}, height{height} {}
 
 Display * Model::getDisplay() {
@@ -68,10 +68,11 @@ void Model::moveZombies() {
 
         i->setPos(newPos);
         i->draw();
-        if (collision(player.get(), i.get())) { //distance(vec) <= (float)i->getRadius() + player->getRadius()
+        if (collision(player.get(), i.get()) && i->getAttackTime() >= i->getAttackDelay()) { //distance(vec) <= (float)i->getRadius() + player->getRadius()
             i->attack(player.get());
         }
         for (int j = 0; j < player->getNumProjectiles(); ++j) {
+            if (player->getProjectile(j) == nullptr) continue;
             try {
                 if (collision(i.get(), player->getProjectile(j))) {
                     //std::cout << "zombie-projectile1 collision " << i->getHealth() << std::endl;
