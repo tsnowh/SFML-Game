@@ -81,3 +81,11 @@ void Player::notify (Projectile * w) {
     deleteProjectile(w);
 }
 
+int Player::getKillCount() {
+    return killCount;
+}
+
+void Player::increaseKillCount() {
+    killCount++;
+}
+

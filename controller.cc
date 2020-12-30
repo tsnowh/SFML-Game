@@ -41,6 +41,7 @@ void Controller::Gameloop() {
         model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
         model.drawZombies();
         model.getDisplay()->renderHealthBar();
+        model.getDisplay()->displayKillCount();
         model.getPlayer()->moveProjectiles();
         model.drawProjectiles();
         model.getDisplay()->getWindow().display();

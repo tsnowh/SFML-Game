@@ -80,6 +80,7 @@ void Model::moveZombies() {
                     i->attack(player->getProjectile(j), false);
                     player->getProjectile(j)->reEvaluateState();
                     i->reEvaluateState();
+                    player->increaseKillCount();
                     //std::cout << "zombie-projectile2 collision " << i->getHealth() << std::endl;
                 }
             } catch ( ... ) {
