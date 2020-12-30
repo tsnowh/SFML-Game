@@ -1,7 +1,7 @@
 #include "enemy.h"
 #include "weapon.h"
 
-Enemy::Enemy(int h, sf::Vector2f pos, float speed, int attackRange, float attackDelay, State state): health{h}, position{pos}, speed{speed}, state{state}, attackRange{attackRange}, attackDelay{attackDelay} {}
+Enemy::Enemy(int h, sf::Vector2f pos, float speed, int attackRange, float attackDelay, State state): health{h}, initalHealth{h}, position{pos}, speed{speed}, state{state}, attackRange{attackRange}, attackDelay{attackDelay} {}
 
 void Enemy::getAttacked(Weapon *w, bool reval) {
     health -= w->getDamage();
@@ -30,6 +30,10 @@ int Enemy::getAttackRange() {
 
 void Enemy::setAttackRange(int i) {
     attackRange = i;
+}
+
+int Enemy::getInitialHealth() {
+    return initalHealth;
 }
 
 int Enemy::getHealth() {

@@ -12,6 +12,7 @@ class Enemy {
   private:
     State state;
     int health;
+    int initalHealth;
     sf::Vector2f position;
     float speed;
     int attackRange;
@@ -34,6 +35,7 @@ class Enemy {
     int getAttackRange();
     void setAttackRange(int);
 
+    int getInitialHealth();
     int getHealth();
     void setHealth(int);
     State getState();

@@ -2,9 +2,10 @@
 #include "model.h"
 
 Display::Display(Model *model, unsigned int width, unsigned int height): window(sf::VideoMode(width, height), "SFML-GAME"), healthBar{sf::RectangleShape(sf::Vector2f(healthWidth, healthHeight))}, model{model} {
-    healthWidth = width / 2;
-    healthHeight = height / 100;
-    healthBar.setPosition(sf::Vector2f(width - healthWidth - bufferWidth, bufferHeight));
+    this->healthWidth = width / 2;
+    this->healthHeight = height / 100;
+    this->healthBar.setPosition(sf::Vector2f(width - healthWidth - bufferWidth, bufferHeight));
+    this->healthBar.setFillColor(sf::Color::Red);
 }
 
 sf::RenderWindow& Display::getWindow() {
@@ -12,6 +13,10 @@ sf::RenderWindow& Display::getWindow() {
 }
 
 void Display::renderHealthBar() {
-    healthBar.setSize(sf::Vector2f(healthWidth + (model->getPlayer()->getHealth() / healthWidth), healthHeight));
+    if ((float)model->getPlayer()->getHealth() / (float)model->getPlayer()->getInitialHealth() == 0) {
+        healthBar.setSize(sf::Vector2f(0, healthHeight));
+    } else {
+        healthBar.setSize(sf::Vector2f(healthWidth * ((float)model->getPlayer()->getHealth() / (float)model->getPlayer()->getInitialHealth()), healthHeight));
+    }
     window.draw(healthBar);
 }
