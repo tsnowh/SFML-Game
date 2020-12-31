@@ -82,6 +82,7 @@ void Model::moveZombies() {
                     i->reEvaluateState();
                     player->increaseKillCount();
                     //std::cout << "zombie-projectile2 collision " << i->getHealth() << std::endl;
+                    break;
                 }
             } catch ( ... ) {
                 
