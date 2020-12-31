@@ -8,18 +8,19 @@ class Model;
 
 class Zombie: public Enemy {
   private:
-    sf::CircleShape shape;
+    sf::Sprite sprite;
     Weapon weapon;
     Model *model;
+    int radius;
   public:
-    Zombie(Model *, sf::Vector2f pos, float speed, int damage, float attackDelay);
+    Zombie(Model *, sf::Sprite spr, sf::Vector2f pos, float speed, int damage, float attackDelay);
     void getAttacked (Weapon *, bool = true) override;
     void attack (Enemy *, bool = true) override;
     void reEvaluateState () override;
     void notify (Projectile *) override;
     float getRadius() override;
 
-    sf::CircleShape draw();
+    sf::Sprite draw();
 };
 
 

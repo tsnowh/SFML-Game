@@ -10,6 +10,11 @@ void Controller::Gameloop() {
     sf::Clock zombie_clock;
     //sf::Time dt = clock.restart();
 
+    sf::Sprite zombieSprite;
+    sf::Texture texture;
+    //texture.setSmooth(true);
+    texture.loadFromFile("corona_cell.png");
+    zombieSprite.setTexture(texture);
     model.drawZombies();
     model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
 
@@ -32,7 +37,7 @@ void Controller::Gameloop() {
         }
 
         if (zombie_clock.getElapsedTime().asSeconds() > 3) {
-            model.addZombie(std::make_unique<Zombie>(&model, sf::Vector2f(rand() % width, rand() % height), 0.5, 10, 1.0));
+            model.addZombie(std::make_unique<Zombie>(&model, zombieSprite, sf::Vector2f(rand() % width, rand() % height), 0.5, 10, 1.0));
             zombie_clock.restart();
         }
 
@@ -46,7 +51,7 @@ void Controller::Gameloop() {
         model.drawProjectiles();
         model.getDisplay()->getWindow().display();
         //std::cout << model.getPlayer()->getHealth() << std::endl;
-        if (model.getPlayer()->getState() == State::Dead) break;
+        //if (model.getPlayer()->getState() == State::Dead) break;
     }
 }
 

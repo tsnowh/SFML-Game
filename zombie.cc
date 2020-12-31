@@ -3,16 +3,18 @@
 
 #include "model.h"
 
-Zombie::Zombie(Model *model, sf::Vector2f pos, float speed, int damage, float attackDelay): Enemy(20, pos, speed, 10, attackDelay), shape{sf::CircleShape(10)}, weapon{Weapon(damage)}, model{model} {
-    shape.setFillColor(sf::Color::Red);
-    shape.setOrigin ({shape.getRadius(), shape.getRadius()});
+Zombie::Zombie(Model *model, sf::Sprite spr, sf::Vector2f pos, float speed, int damage, float attackDelay): Enemy(20, pos, speed, 10, attackDelay), weapon{Weapon(damage)}, model{model}, radius{18}, sprite{spr} {
+    //shape.setFillColor(sf::Color::Red);
+    //sprite.setTextureRect(sf::IntRect(0, 0, 180, 180));
+    sprite.setScale(sf::Vector2f(0.2f, 0.2f));
+    sprite.setOrigin (sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
     this->setPos(pos);
-    shape.setPosition(pos);
+    sprite.setPosition(pos);
 }
 
-sf::CircleShape Zombie::draw() {
-    shape.setPosition(getPos());
-    return shape;
+sf::Sprite Zombie::draw() {
+    sprite.setPosition(getPos());
+    return sprite;
 }
 
 void Zombie::reEvaluateState () {
@@ -39,5 +41,5 @@ void Zombie::attack (Enemy *e, bool reval) {
 }
 
 float Zombie::getRadius() {
-    return shape.getRadius();
+    return radius;
 }
