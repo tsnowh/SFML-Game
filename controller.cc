@@ -51,7 +51,7 @@ void Controller::Gameloop() {
         model.drawProjectiles();
         model.getDisplay()->getWindow().display();
         //std::cout << model.getPlayer()->getHealth() << std::endl;
-        //if (model.getPlayer()->getState() == State::Dead) break;
+        if (model.getPlayer()->getState() == State::Dead) break;
     }
 }
 
