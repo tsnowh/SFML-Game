@@ -13,6 +13,7 @@ class exception;
 class Player: public Enemy {
   private:
     sf::Texture ptex;
+    sf::IntRect spriteRec;
     sf::Sprite sprite;
     std::vector<std::unique_ptr<Projectile>> projectiles;
     Model *model;

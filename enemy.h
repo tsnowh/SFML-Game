@@ -14,10 +14,12 @@ class Enemy {
     int health;
     int initalHealth;
     sf::Vector2f position;
+    sf::Vector2f direc;
     float speed;
     int attackRange;
     float attackDelay;
-    sf::Clock zombieAttack_clock;
+    sf::Clock attack_clock;
+    sf::Clock animation_clock;
   public:
     Enemy(int h, sf::Vector2f pos, float speed, int attackRange, float attackDelay, State = State::Alive);
     virtual void getAttacked (Weapon *, bool = true) = 0;
@@ -47,8 +49,15 @@ class Enemy {
     void restartAttackClock();
     float getAttackTime();
 
+    void restartAnimateClock();
+    float getAnimateTime();
+
     sf::Vector2f getPos();
     void setPos(sf::Vector2f);
+
+    sf::Vector2f getDirec();
+    void setDirec(sf::Vector2f);
+
     float getSpeed();
     void setSpeed(float);
 };

@@ -61,11 +61,19 @@ void Enemy::getAttackDelay(float i) {
 }
 
 void Enemy::restartAttackClock() {
-    zombieAttack_clock.restart();
+    attack_clock.restart();
 }
 
 float Enemy::getAttackTime() {
-    return zombieAttack_clock.getElapsedTime().asSeconds();
+    return attack_clock.getElapsedTime().asSeconds();
+}
+
+void Enemy::restartAnimateClock() {
+    animation_clock.restart();
+}
+
+float Enemy::getAnimateTime() {
+    return animation_clock.getElapsedTime().asSeconds();
 }
 
 sf::Vector2f Enemy::getPos() {
@@ -74,6 +82,14 @@ sf::Vector2f Enemy::getPos() {
 
 void Enemy::setPos(sf::Vector2f i) {
     position = i;
+}
+
+sf::Vector2f Enemy::getDirec() {
+    return direc;
+}
+
+void Enemy::setDirec(sf::Vector2f i) {
+    direc = i;
 }
 
 float Enemy::getSpeed() {

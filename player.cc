@@ -11,7 +11,8 @@ Player::Player(Model *model, sf::Vector2f pos, float speed): Enemy(100, pos, spe
     this->ptex.loadFromFile("player.png");
 
     this->sprite.setTexture(ptex);
-    this->sprite.setTextureRect(sf::IntRect(1, 1, 13, 16));
+    this->spriteRec = sf::IntRect(1, 1, 13, 16);
+    this->sprite.setTextureRect(spriteRec);
     this->sprite.setScale(sf::Vector2f(3.0f, 3.0f));
     this->sprite.setOrigin (sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
     this->sprite.setPosition(pos);
