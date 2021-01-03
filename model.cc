@@ -71,6 +71,7 @@ void Model::moveZombies() {
         if (collision(player.get(), i.get()) && i->getAttackTime() >= i->getAttackDelay()) { //distance(vec) <= (float)i->getRadius() + player->getRadius()
             i->attack(player.get());
         }
+        
         for (int j = 0; j < player->getNumProjectiles(); ++j) {
             if (player->getProjectile(j) == nullptr) continue;
             try {
@@ -88,6 +89,26 @@ void Model::moveZombies() {
                 
             }
         }
+        /*
+        for (int j = player->getNumProjectiles() - 1; j >= 0; --j) {
+            if (player->getProjectile(j) == nullptr) continue;
+            if (i.get() == nullptr) break;
+            try {
+                if (collision(i.get(), player->getProjectile(j))) {
+                    //std::cout << "zombie-projectile1 collision " << i->getHealth() << std::endl;
+                    player->getProjectile(j)->attack(i.get(), false);
+                    i->attack(player->getProjectile(j), false);
+                    player->getProjectile(j)->reEvaluateState();
+                    i->reEvaluateState();
+                    player->increaseKillCount();
+                    //std::cout << "zombie-projectile2 collision " << i->getHealth() << std::endl;
+                    //break;
+                }
+            } catch ( ... ) {
+                
+            }
+        }
+        */
     }
 }
 

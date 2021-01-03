@@ -5,12 +5,16 @@
 #include "model.h"
 
 // hard coded position for now
-Player::Player(Model *model, sf::Vector2f pos, float speed): Enemy(100, pos, speed, 500, 0.3), shape{sf::CircleShape(20)}, model{model} {
-    shape.setRadius(20);
-    shape.setOrigin ({shape.getRadius(), shape.getRadius()});
-    this->setPos(pos);
-    shape.setPosition(pos);
-    shape.setFillColor(sf::Color::Green);
+Player::Player(Model *model, sf::Vector2f pos, float speed): Enemy(100, pos, speed, 500, 0.3), model{model}, radius{20} {
+    //shape.setOrigin ({shape.getRadius(), shape.getRadius()});
+
+    this->ptex.loadFromFile("player.png");
+
+    this->sprite.setTexture(ptex);
+    this->sprite.setTextureRect(sf::IntRect(1, 1, 13, 16));
+    this->sprite.setScale(sf::Vector2f(3.0f, 3.0f));
+    this->sprite.setOrigin (sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
+    this->sprite.setPosition(pos);
 }
 
 void Player::getAttacked (Weapon *w, bool reval) {
@@ -27,13 +31,13 @@ void Player::reEvaluateState () {
     }
 }
 
-sf::CircleShape Player::draw() {
-    shape.setPosition(getPos());
-    return shape;
+sf::Sprite Player::draw() {
+    sprite.setPosition(getPos());
+    return sprite;
 }
 
 float Player::getRadius() {
-    return shape.getRadius();
+    return radius;
 }
 
 void Player::addProjectile(std::unique_ptr<Projectile> p) {

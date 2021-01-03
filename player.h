@@ -12,10 +12,12 @@ class exception;
 
 class Player: public Enemy {
   private:
-    sf::CircleShape shape;
+    sf::Texture ptex;
+    sf::Sprite sprite;
     std::vector<std::unique_ptr<Projectile>> projectiles;
     Model *model;
     int killCount = 0;
+    int radius;
   public:
     Player(Model *, sf::Vector2f pos, float speed);
     void getAttacked (Weapon *, bool = true) override;
@@ -34,7 +36,7 @@ class Player: public Enemy {
     int getKillCount();
     void increaseKillCount();
 
-    sf::CircleShape draw();
+    sf::Sprite draw();
 };
 
 
