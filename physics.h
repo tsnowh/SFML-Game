@@ -5,9 +5,13 @@
 
 class Enemy;
 
+extern float pi;
+
 float distance(const sf::Vector2f&);
 
 sf::Vector2f normalize(const sf::Vector2f&);
+
+float getAngle(sf::Vector2f v1, sf::Vector2f v2);
 
 bool collision(Enemy *, Enemy *);
 

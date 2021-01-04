@@ -1,5 +1,7 @@
 #include "weapon.h"
 #include <iostream>
+#include <cmath>
+#include "physics.h"
 
 
 Weapon::Weapon(int damage, Enemy * owner): damage{damage}, owner{owner} {}
@@ -19,21 +21,39 @@ Enemy * Weapon::getOwner() {
 }
 
 Projectile::Projectile(Enemy * owner, sf::Vector2f pos, sf::Vector2f direc, float range, float speed, int damage) :
-        Enemy(1, pos, speed, 5, 0), Weapon(damage, owner), shape{sf::CircleShape(5)}, direction{direc}, range{range} {
-    shape.setRadius(5);
-    shape.setOrigin ({shape.getRadius(), shape.getRadius()});
+        Enemy(1, pos, speed, 5, 0), Weapon(damage, owner), direction{direc}, range{range}, radius{5} {
+    
+    /*
+    sprite.setRadius(5);
+    sprite.setOrigin ({shape.getRadius(), shape.getRadius()});
     this->setPos(pos);
-    shape.setPosition(pos);
-    shape.setFillColor(sf::Color::White);
+    sprite.setPosition(pos);
+    sprite.setFillColor(sf::Color::White);
+    */
+
+    this->ptex.loadFromFile("bullet.png");
+
+    this->sprite.setTexture(ptex);
+    //this->spriteRec = sf::IntRect(0, 0, 13, 16);
+    //this->sprite.setTextureRect(spriteRec);
+    this->sprite.setScale(sf::Vector2f(1.5f, 1.5f));
+    this->sprite.setOrigin (sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
+    this->sprite.setPosition(pos);
+
+    if (direc.x >= 0.0f) {
+        this->sprite.rotate(getAngle(sf::Vector2f(0.0, -1.0), direc));
+    } else {
+        this->sprite.rotate( -1 * getAngle(sf::Vector2f(0.0, -1.0), direc));
+    }
 }
 
-sf::CircleShape Projectile::draw() {
-    shape.setPosition(getPos());
-    return shape;
+sf::Sprite Projectile::draw() {
+    sprite.setPosition(getPos());
+    return sprite;
 }
 
 float Projectile::getRadius() {
-    return shape.getRadius();
+    return radius;
 }
 
 void Projectile::move(int width, int height) {
@@ -84,4 +104,8 @@ void Projectile::reEvaluateState () {
     if (getState() == State::Dead) {
         getOwner()->notify(this);
     }
+}
+
+sf::Sprite Projectile::getSprite() {
+    return sprite;
 }

@@ -21,6 +21,7 @@ class Zombie: public Enemy {
     float getRadius() override;
 
     sf::Sprite draw();
+    sf::Sprite getSprite() override;
 };
 
 

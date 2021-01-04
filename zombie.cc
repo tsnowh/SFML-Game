@@ -43,3 +43,7 @@ void Zombie::attack (Enemy *e, bool reval) {
 float Zombie::getRadius() {
     return radius;
 }
+
+sf::Sprite Zombie::getSprite() {
+    return sprite;
+}

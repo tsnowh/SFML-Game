@@ -38,6 +38,7 @@ class Player: public Enemy {
     void increaseKillCount();
 
     sf::Sprite draw();
+    sf::Sprite getSprite() override;
 };
 
 

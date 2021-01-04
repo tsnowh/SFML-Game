@@ -27,6 +27,7 @@ class Enemy {
     virtual void notify (Projectile *) = 0;
     virtual float getRadius() = 0;
     virtual void reEvaluateState ();
+    virtual sf::Sprite getSprite() = 0;
 
     // getters / setters
     int getX();
