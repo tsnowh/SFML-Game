@@ -12,9 +12,6 @@ class exception;
 
 class Player: public Enemy {
   private:
-    sf::Texture ptex;
-    sf::IntRect spriteRec;
-    sf::Sprite sprite;
     std::vector<std::unique_ptr<Projectile>> projectiles;
     Model *model;
     int killCount = 0;
@@ -37,8 +34,8 @@ class Player: public Enemy {
     int getKillCount();
     void increaseKillCount();
 
-    sf::Sprite draw();
-    sf::Sprite getSprite() override;
+    //sf::Sprite draw() override;
+    //sf::Sprite getSprite() override;
 };
 
 

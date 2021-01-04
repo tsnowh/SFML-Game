@@ -1,7 +1,10 @@
 #include "enemy.h"
 #include "weapon.h"
 
-Enemy::Enemy(int h, sf::Vector2f pos, float speed, int attackRange, float attackDelay, State state): health{h}, initalHealth{h}, position{pos}, speed{speed}, state{state}, attackRange{attackRange}, attackDelay{attackDelay} {}
+#include <string>
+
+Enemy::Enemy(int h, sf::Vector2f pos, float speed, int attackRange, float attackDelay, State state): health{h}, initalHealth{h}, position{pos}, speed{speed}, 
+    state{state}, attackRange{attackRange}, attackDelay{attackDelay} {}
 
 void Enemy::getAttacked(Weapon *w, bool reval) {
     health -= w->getDamage();
@@ -106,4 +109,29 @@ void Enemy::reEvaluateState () {
     }
 }
 
+sf::Sprite * Enemy::getSprite() {
+    return &sprite;
+}
+
+sf::Sprite Enemy::draw() {
+    sprite.setPosition(getPos());
+    return sprite;
+}
+
+sf::Texture Enemy::getTexture () {
+    return ptex;
+}
+
+void Enemy::setTex (std::string str) {
+    ptex.loadFromFile(str);
+    sprite.setTexture(ptex);
+}
+
+void Enemy::setSRec(sf::IntRect r) {
+    spriteRec = r;
+}
+
+sf::IntRect Enemy::getSRec() {
+    return spriteRec;
+}
 

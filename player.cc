@@ -8,14 +8,14 @@
 Player::Player(Model *model, sf::Vector2f pos, float speed): Enemy(100, pos, speed, 500, 0.3), model{model}, radius{20} {
     //shape.setOrigin ({shape.getRadius(), shape.getRadius()});
 
-    this->ptex.loadFromFile("player.png");
+    setTex("player.png");
 
-    this->sprite.setTexture(ptex);
-    this->spriteRec = sf::IntRect(1, 1, 13, 16);
-    this->sprite.setTextureRect(spriteRec);
-    this->sprite.setScale(sf::Vector2f(3.0f, 3.0f));
-    this->sprite.setOrigin (sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
-    this->sprite.setPosition(pos);
+    //getSprite()->setTexture(getTexture());
+    setSRec(sf::IntRect(1, 1, 13, 16));
+    getSprite()->setTextureRect(getSRec());
+    getSprite()->setScale(sf::Vector2f(3.0f, 3.0f));
+    getSprite()->setOrigin (sf::Vector2f(getSprite()->getLocalBounds().width / 2, getSprite()->getLocalBounds().height / 2));
+    getSprite()->setPosition(pos);
 }
 
 void Player::getAttacked (Weapon *w, bool reval) {
@@ -32,10 +32,12 @@ void Player::reEvaluateState () {
     }
 }
 
+/*
 sf::Sprite Player::draw() {
     sprite.setPosition(getPos());
     return sprite;
 }
+*/
 
 float Player::getRadius() {
     return radius;
@@ -94,6 +96,8 @@ void Player::increaseKillCount() {
     killCount++;
 }
 
-sf::Sprite Player::getSprite() {
+/*
+sf::Sprite * Player::getSprite() {
     return sprite;
 }
+*/

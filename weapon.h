@@ -20,16 +20,13 @@ class Weapon {
 
 class Projectile: public Weapon, public Enemy {
   private:
-    sf::Texture ptex;
-    sf::IntRect spriteRec;
-    sf::Sprite sprite;
     sf::Vector2f direction;
     float distance = 0;
     float range;
     int radius;
   public:
     Projectile(Enemy * owner, sf::Vector2f pos, sf::Vector2f direc, float range, float speed = 1.0, int damage = 100);
-    sf::Sprite draw();
+    //sf::Sprite draw() override;
     void move(int maxW, int maxH);
     void getAttacked (Weapon *, bool = true) override;
     void attack (Enemy *, bool = true) override;
@@ -37,7 +34,7 @@ class Projectile: public Weapon, public Enemy {
     float getRadius() override;
     virtual void reEvaluateState ();
 
-    sf::Sprite getSprite() override;
+    //sf::Sprite getSprite() override;
 };
 
 

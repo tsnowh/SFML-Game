@@ -20,6 +20,10 @@ class Enemy {
     float attackDelay;
     sf::Clock attack_clock;
     sf::Clock animation_clock;
+
+    sf::Texture ptex;
+    sf::IntRect spriteRec;
+    sf::Sprite sprite;
   public:
     Enemy(int h, sf::Vector2f pos, float speed, int attackRange, float attackDelay, State = State::Alive);
     virtual void getAttacked (Weapon *, bool = true) = 0;
@@ -27,7 +31,14 @@ class Enemy {
     virtual void notify (Projectile *) = 0;
     virtual float getRadius() = 0;
     virtual void reEvaluateState ();
-    virtual sf::Sprite getSprite() = 0;
+
+    sf::Sprite * getSprite();
+    void setTex (std::string);
+    sf::Texture getTexture ();
+    void setSRec(sf::IntRect);
+    sf::IntRect getSRec();
+
+    virtual sf::Sprite draw();
 
     // getters / setters
     int getX();

@@ -3,19 +3,24 @@
 
 #include "model.h"
 
-Zombie::Zombie(Model *model, sf::Sprite spr, sf::Vector2f pos, float speed, int damage, float attackDelay): Enemy(20, pos, speed, 10, attackDelay), weapon{Weapon(damage)}, model{model}, radius{18}, sprite{spr} {
+Zombie::Zombie(Model *model, sf::Vector2f pos, float speed, int damage, float attackDelay): Enemy(20, pos, speed, 10, attackDelay), weapon{Weapon(damage)}, model{model}, radius{18} {
     //shape.setFillColor(sf::Color::Red);
     //sprite.setTextureRect(sf::IntRect(0, 0, 180, 180));
-    sprite.setScale(sf::Vector2f(0.2f, 0.2f));
-    sprite.setOrigin (sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
+    setTex("corona_cell.png");
+
+    //getSprite()->setTexture(getTexture());
+    getSprite()->setScale(sf::Vector2f(0.2f, 0.2f));
+    getSprite()->setOrigin(sf::Vector2f(getSprite()->getLocalBounds().width / 2, getSprite()->getLocalBounds().height / 2));
     this->setPos(pos);
-    sprite.setPosition(pos);
+    getSprite()->setPosition(pos);
 }
 
+/*
 sf::Sprite Zombie::draw() {
     sprite.setPosition(getPos());
     return sprite;
 }
+*/
 
 void Zombie::reEvaluateState () {
     if (getHealth() <= 0) {
@@ -44,6 +49,8 @@ float Zombie::getRadius() {
     return radius;
 }
 
+/*
 sf::Sprite Zombie::getSprite() {
     return sprite;
 }
+*/

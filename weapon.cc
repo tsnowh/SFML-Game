@@ -31,26 +31,28 @@ Projectile::Projectile(Enemy * owner, sf::Vector2f pos, sf::Vector2f direc, floa
     sprite.setFillColor(sf::Color::White);
     */
 
-    this->ptex.loadFromFile("bullet.png");
+    setTex("bullet.png");
 
-    this->sprite.setTexture(ptex);
+    //getSprite()->setTexture(getTexture());
     //this->spriteRec = sf::IntRect(0, 0, 13, 16);
     //this->sprite.setTextureRect(spriteRec);
-    this->sprite.setScale(sf::Vector2f(1.5f, 1.5f));
-    this->sprite.setOrigin (sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
-    this->sprite.setPosition(pos);
+    getSprite()->setScale(sf::Vector2f(1.5f, 1.5f));
+    getSprite()->setOrigin (sf::Vector2f(getSprite()->getLocalBounds().width / 2, getSprite()->getLocalBounds().height / 2));
+    getSprite()->setPosition(pos);
 
     if (direc.x >= 0.0f) {
-        this->sprite.rotate(getAngle(sf::Vector2f(0.0, -1.0), direc));
+        getSprite()->rotate(getAngle(sf::Vector2f(0.0, -1.0), direc));
     } else {
-        this->sprite.rotate( -1 * getAngle(sf::Vector2f(0.0, -1.0), direc));
+        getSprite()->rotate( -1 * getAngle(sf::Vector2f(0.0, -1.0), direc));
     }
 }
 
+/*
 sf::Sprite Projectile::draw() {
     sprite.setPosition(getPos());
     return sprite;
 }
+*/
 
 float Projectile::getRadius() {
     return radius;
@@ -106,6 +108,8 @@ void Projectile::reEvaluateState () {
     }
 }
 
+/*
 sf::Sprite Projectile::getSprite() {
     return sprite;
 }
+*/
