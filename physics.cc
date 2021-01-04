@@ -24,7 +24,15 @@ float getAngle(sf::Vector2f v1, sf::Vector2f v2) {
 
 bool collision(Enemy *e1, Enemy *e2) {
     if (e1 == nullptr || e2 == nullptr) throw;
+    /*
     if (distance(e1->getPos() - e2->getPos()) <= e1->getRadius() + e2->getRadius()) {
+        return true;
+    } else {
+        return false;
+    }
+    */
+
+    if (e1->getSprite()->getGlobalBounds().intersects(e2->getSprite()->getGlobalBounds())) {
         return true;
     } else {
         return false;
