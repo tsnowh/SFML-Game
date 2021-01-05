@@ -18,7 +18,7 @@ class Model {
     int height;
 
   public:
-    Model(int width = 500, int height = 500, float playerSpeed = 1.0);
+    Model(int width = 500, int height = 500, float playerSpeed = 0.5);
     Display * getDisplay();
     Player * getPlayer();
 

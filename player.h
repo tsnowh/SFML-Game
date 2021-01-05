@@ -16,6 +16,13 @@ class Player: public Enemy {
     Model *model;
     int killCount = 0;
     int radius;
+    std::vector<sf::IntRect> frames_up;
+    std::vector<sf::IntRect> frames_down;
+    std::vector<sf::IntRect> frames_left;
+    std::vector<sf::IntRect> frames_right;
+    int framePos = 0;
+    bool framePosUp = true;
+    int maxFrame;
   public:
     Player(Model *, sf::Vector2f pos, float speed);
     void getAttacked (Weapon *, bool = true) override;
@@ -33,6 +40,8 @@ class Player: public Enemy {
 
     int getKillCount();
     void increaseKillCount();
+
+    void nextFrame();
 
     //sf::Sprite draw() override;
     //sf::Sprite getSprite() override;

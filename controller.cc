@@ -58,12 +58,20 @@ void Controller::Gameloop() {
 }
 
 void Controller::KeyPressedHandler() {
+    //model.getPlayer()->setDirec(sf::Vector2f(0, 1));
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { //Move Up
         if ((model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(0, -1))).y <= 0.0) {
             model.getPlayer()->setPos(sf::Vector2f(model.getPlayer()->getPos().x, height)); // + sf::Vector2f(0, -1 * model.getPlayer()->getPos().y));
         } else {
             //model.getPlayer()->setY(model.getPlayer()->getY() - 1);
             model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(0, -1)));
+        }
+        
+        model.getPlayer()->setDirec(sf::Vector2f(0, -1));
+
+        if(model.getPlayer()->getAnimateTime() >= 0.3) {
+            model.getPlayer()->nextFrame();
+            model.getPlayer()->restartAnimateClock();
         }
     }
 
@@ -74,6 +82,13 @@ void Controller::KeyPressedHandler() {
             //model.getPlayer()->setY(model.getPlayer()->getY() + 1);
             model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(0, 1)));
         }
+
+        model.getPlayer()->setDirec(sf::Vector2f(0, 1));
+
+        if (model.getPlayer()->getAnimateTime() >= 0.3) {
+            model.getPlayer()->nextFrame();
+            model.getPlayer()->restartAnimateClock();
+        }
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { //Move Right
@@ -83,6 +98,13 @@ void Controller::KeyPressedHandler() {
             //model.getPlayer()->setX(model.getPlayer()->getX() + 1);
             model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(1, 0)));
         }
+
+        model.getPlayer()->setDirec(sf::Vector2f(1, 0));
+
+        if (model.getPlayer()->getAnimateTime() >= 0.3) {
+            model.getPlayer()->nextFrame();
+            model.getPlayer()->restartAnimateClock();
+        }
     }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { //Move Left
@@ -91,6 +113,13 @@ void Controller::KeyPressedHandler() {
         } else {
             //model.getPlayer()->setX(model.getPlayer()->getX() - 1);
             model.getPlayer()->setPos(model.getPlayer()->getPos() + (model.getPlayer()->getSpeed() * sf::Vector2f(-1, 0)));
+        }
+
+        model.getPlayer()->setDirec(sf::Vector2f(-1, 0));
+
+        if (model.getPlayer()->getAnimateTime() >= 0.3) {
+            model.getPlayer()->nextFrame();
+            model.getPlayer()->restartAnimateClock();
         }
     }
     //std::cout << model.getPlayer()->getX() << ", " << model.getPlayer()->getY() << std::endl;

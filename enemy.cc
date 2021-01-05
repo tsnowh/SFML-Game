@@ -129,6 +129,7 @@ void Enemy::setTex (std::string str) {
 
 void Enemy::setSRec(sf::IntRect r) {
     spriteRec = r;
+    sprite.setTextureRect(spriteRec);
 }
 
 sf::IntRect Enemy::getSRec() {
