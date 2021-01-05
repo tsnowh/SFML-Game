@@ -66,7 +66,16 @@ void Model::moveZombies() {
             newPos.x = 0;
         }
 
+        i->setDirec(direction);
+
         i->setPos(newPos);
+
+        if (i->getAnimateTime() >= 0.3) {
+            i->nextFrame();
+            i->restartAnimateClock();
+        }
+
+        //i->nextFrame();
         i->draw();
         if (collision(player.get(), i.get()) && i->getAttackTime() >= i->getAttackDelay()) { //distance(vec) <= (float)i->getRadius() + player->getRadius()
             i->attack(player.get());
