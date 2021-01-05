@@ -10,6 +10,12 @@ void Controller::Gameloop() {
     sf::Clock zombie_clock;
     //sf::Time dt = clock.restart();
 
+    sf::Texture background;
+    background.loadFromFile("dungeon_tiles.png");
+    sf::Sprite backg(background);
+    backg.setScale(sf::Vector2f(6.3f * (float)width / 500, 6.1f * (float)height / 500));
+
+
     /*
     sf::Sprite zombieSprite;
     sf::Texture texture;
@@ -30,6 +36,7 @@ void Controller::Gameloop() {
         }
 
         model.getDisplay()->getWindow().clear();
+        model.getDisplay()->getWindow().draw(backg);
 
         KeyPressedHandler();
 
