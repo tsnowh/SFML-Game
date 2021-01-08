@@ -40,6 +40,7 @@ class Player: public Enemy {
 
     int getKillCount();
     void increaseKillCount();
+    void resetKillCount();
 
     void nextFrame();
 

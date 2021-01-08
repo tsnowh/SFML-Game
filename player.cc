@@ -119,6 +119,10 @@ void Player::increaseKillCount() {
     killCount++;
 }
 
+void Player::resetKillCount() {
+    killCount = 0;
+}
+
 /*
 sf::Sprite * Player::getSprite() {
     return sprite;
