@@ -21,6 +21,14 @@ int Model::getHeight() {
     return height;
 }
 
+int Model::getWaveNum() {
+    return waveNum;
+}
+
+void Model::setWaveNum(int i) {
+    waveNum = i;
+}
+
 void Model::addZombie(std::unique_ptr<Zombie> z) {
     if (z) zombies.push_back(std::move(z));
     //std::cout << "added zombie " << zombies.size() << std::endl;
@@ -34,6 +42,10 @@ void Model::removeZombie(Zombie *z) {
         int i = zombies.end() - it;
         zombies.erase(it);
     }
+}
+
+int Model::getNumZombie() {
+    return zombies.size();
 }
 
 void Model::moveZombies() {

@@ -16,7 +16,7 @@ class Model {
     std::vector<std::unique_ptr<Zombie>> zombies;
     int width;
     int height;
-
+    int waveNum = 0;
   public:
     Model(int width = 500, int height = 500, float playerSpeed = 0.5);
     Display * getDisplay();
@@ -25,9 +25,13 @@ class Model {
     int getWidth();
     int getHeight();
 
+    int getWaveNum();
+    void setWaveNum(int);
+
     //Zombie methods
     void addZombie(std::unique_ptr<Zombie>);
     void removeZombie(Zombie *);
+    int getNumZombie();
     void moveZombies();
     void drawZombies();
     void drawProjectiles();

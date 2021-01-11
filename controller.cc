@@ -1,5 +1,6 @@
 #include "controller.h"
 #include <iostream>
+#include "physics.h"
 
 Controller::Controller(int width, int height): width{width}, height{height}, model{Model{width, height}} {}
 
@@ -14,7 +15,6 @@ void Controller::Gameloop() {
     background.loadFromFile("dungeon_tiles.png");
     sf::Sprite backg(background);
     backg.setScale(sf::Vector2f(6.3f * (float)width / 500, 6.1f * (float)height / 500));
-
 
     /*
     sf::Sprite zombieSprite;
@@ -33,7 +33,7 @@ void Controller::Gameloop() {
                 model.getDisplay()->getWindow().close();
                 break;
             }
-        }
+        } 
 
         model.getDisplay()->getWindow().clear();
         model.getDisplay()->getWindow().draw(backg);
@@ -45,12 +45,21 @@ void Controller::Gameloop() {
             //shoot_clock.restart();
         }
 
-        if (zombie_clock.getElapsedTime().asSeconds() > 3) {
-            model.addZombie(std::make_unique<Zombie>(&model, sf::Vector2f(rand() % width, rand() % height), 0.5, 10, 1.0));
+        if (model.getNumZombie() == 0) {
+            model.setWaveNum(model.getWaveNum() + 1);
+            for (int i = 0; i < model.getWaveNum() * 2; ++i) {
+                sf::Vector2f temp;
+                do {
+                    temp.x = rand() % width;
+                    temp.y = rand() % height;
+                } while (distance(model.getPlayer()->getPos() - temp) <= 100);
+                model.addZombie(std::make_unique<Zombie>(&model, temp, 0.5, 10, 1.0));
+            }
             zombie_clock.restart();
         }
 
         // make a render method (maybe in the display class)
+        //if (model.getDisplay->getWindow().hasFocus()) {}
         model.moveZombies();
         model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
         model.drawZombies();
