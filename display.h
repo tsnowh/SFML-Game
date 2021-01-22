@@ -20,11 +20,14 @@ class Display {
 
     sf::Font font;
     sf::Text killCount;
+    sf::Text died;
   public:
-    Display(Model *, unsigned int width = 500, unsigned int height = 500);
+    Display(Model *model, unsigned int width = 500, unsigned int height = 500);
+    //~Display();
     sf::RenderWindow& getWindow();
     void renderHealthBar();
     void displayKillCount();
+    void displayDied();
 };
 
 

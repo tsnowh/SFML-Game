@@ -3,6 +3,12 @@
 
 #include "model.h"
 
+/*
+Zombie::~Zombie() {
+    delete model;
+}
+*/
+
 Zombie::Zombie(Model *model, sf::Vector2f pos, float speed, int damage, float attackDelay): Enemy(20, pos, speed, 10, attackDelay), weapon{Weapon(damage)}, model{model}, radius{18} {
     //shape.setFillColor(sf::Color::Red);
     //sprite.setTextureRect(sf::IntRect(0, 0, 180, 180));

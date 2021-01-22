@@ -26,6 +26,15 @@ void Controller::Gameloop() {
     model.drawZombies();
     model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
 
+    sf::Clock start_clock;
+
+    model.getDisplay()->getWindow().clear();
+    model.getDisplay()->getWindow().draw(backg);
+    model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
+    model.getDisplay()->getWindow().display();
+    
+    while (start_clock.getElapsedTime().asSeconds() < 3);
+
     while (model.getDisplay()->getWindow().isOpen()) {
 
         while (model.getDisplay()->getWindow().pollEvent(event)) {
@@ -71,6 +80,16 @@ void Controller::Gameloop() {
         //std::cout << model.getPlayer()->getHealth() << std::endl;
         if (model.getPlayer()->getState() == State::Dead) break;
     }
+    //model.getDisplay()->getWindow().clear();
+    start_clock.restart();
+    model.getDisplay()->getWindow().clear();
+    model.getDisplay()->getWindow().draw(backg);
+    model.getDisplay()->getWindow().draw(model.getPlayer()->draw());
+    model.drawZombies();
+    model.getDisplay()->displayKillCount();
+    model.getDisplay()->displayDied();
+    model.getDisplay()->getWindow().display();
+    while (start_clock.getElapsedTime().asSeconds() < 3);
 }
 
 void Controller::KeyPressedHandler() {

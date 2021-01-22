@@ -4,6 +4,12 @@
 #include "physics.h"
 #include "model.h"
 
+/*
+Player::~Player() {
+    delete model;
+}
+*/
+
 // hard coded position for now
 Player::Player(Model *model, sf::Vector2f pos, float speed): Enemy(100, pos, speed, 500, 0.3), model{model}, radius{20} {
     //shape.setOrigin ({shape.getRadius(), shape.getRadius()});

@@ -19,6 +19,7 @@ class Zombie: public Enemy {
     bool framePosUp = true;
     int maxFrame;
   public:
+    //~Zombie();
     Zombie(Model *, sf::Vector2f pos, float speed, int damage, float attackDelay);
     void getAttacked (Weapon *, bool = true) override;
     void attack (Enemy *, bool = true) override;

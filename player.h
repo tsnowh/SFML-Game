@@ -24,6 +24,7 @@ class Player: public Enemy {
     bool framePosUp = true;
     int maxFrame;
   public:
+    //~Player();
     Player(Model *, sf::Vector2f pos, float speed);
     void getAttacked (Weapon *, bool = true) override;
     void attack (Enemy *, bool = true) override;
