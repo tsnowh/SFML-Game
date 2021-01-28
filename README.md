@@ -4,6 +4,10 @@
 ###### When ghosts get close they will deal damage to your player, player health indicated by red bar in top right
 ###### Top left shows your "Kill count" which represents how many ghosts you have "killed"
 #
+#
+###### The code design unitilizes the Model View Controller Design pattern as well as the visitor design pattern.
+###### The code adheres to RAII Principles as memory management is done through Smart Pointers
+#
 ###### Controls:
 ######   -WASD to move
 ######   -Space bar to shoot (in direction of mouse)
