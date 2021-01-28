@@ -12,6 +12,9 @@
 ###### Once you launch the game there is a 3 second timer until the game starts (make sure you click into the window)
 ###### Once you "die" (player health reaches 0) there is a 3 second timer until the window closes
 #
+# Demo
+![alt text](https://github.com/tsnowh/SFML-Game/blob/master/screenshot 1.jpg?raw=true)
+#
 ###### Game art from: https://opengameart.org/
 #
 #
